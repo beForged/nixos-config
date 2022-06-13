@@ -5,6 +5,7 @@
   imports = [
     ./zsh.nix
     ./git.nix
+    ./vim.nix
   ];
 
   home.packages = [

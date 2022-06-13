@@ -176,13 +176,13 @@ in
 
   # List packages installed in system profile. 
   environment.systemPackages = with pkgs; [
-    	vim 
+    vim 
 	pciutils # contains lspci
     home-manager
 
 	# internet 
-    	wget
-    	firefox
+    wget
+    firefox
 	google-chrome
 	tailscale
 
