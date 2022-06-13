@@ -2,6 +2,10 @@
 
 {
 
+  imports = [
+    ./zsh.nix
+  ];
+
   home.packages = [
 
   ];

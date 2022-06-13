@@ -99,7 +99,7 @@ in
   };
 
   # shell
-  programs.zsh.enable = true;
+  # programs.zsh.enable = true;
 
 
   #steam
