@@ -12,6 +12,8 @@
 
   ];
 
+  home.file.".xinitrc".source = ./files/xinitrc;
+
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home.username = "scarlet";
