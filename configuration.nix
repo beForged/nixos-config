@@ -7,12 +7,13 @@
   # list packages installed in system profile tracking unstable branch
 let
 	unstable = import <nixos-unstable> { config.allowUnfree = true; };
+    home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/master.tar.gz";
 in 
 {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      <home-manager/nixos>
+      (import "${home-manager}/nixos")
     ];
 
   #allow dirty unfree software (like steam)
@@ -58,8 +59,8 @@ in
 	];
   };
 
-  home-manager.users.scarlet = { pkgs, ... }: {
-    home.packages = [];
+  home-manager.users.scarlet = {
+    imports = [./home-manager/home.nix ];
   };
   home-manager.useUserPackages = true;
   home-manager.useGlobalPkgs = true;
@@ -177,6 +178,7 @@ in
   environment.systemPackages = with pkgs; [
     	vim 
 	pciutils # contains lspci
+    home-manager
 
 	# internet 
     	wget
