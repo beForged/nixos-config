@@ -7,7 +7,7 @@
   # list packages installed in system profile tracking unstable branch
 let
 	unstable = import <nixos-unstable> { config.allowUnfree = true; };
-    home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/master.tar.gz";
+    home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-22.05.tar.gz";
 in 
 {
   imports =
@@ -178,6 +178,9 @@ in
   environment.systemPackages = with pkgs; [
     vim 
 	pciutils # contains lspci
+    ntfs3g
+    fuse
+    xdg-utils
     home-manager
 
 	# internet 
@@ -204,6 +207,7 @@ in
 	gopls
 	jetbrains.idea-community
 	jdk11
+    python3
 
 	# ardour plugins
 	lv2
@@ -215,6 +219,7 @@ in
 	carla
 	cadence
 	pavucontrol 
+    pulseaudio
   ];
 
   xdg.mime.defaultApplications = {
