@@ -6,13 +6,15 @@
     ./zsh.nix
     ./git.nix
     ./vim.nix
+    ./kitty.nix
+    ./i3.nix
   ];
 
   home.packages = [
 
   ];
 
-  home.file.".xinitrc".source = ./files/xinitrc;
+  home.file.".xinitrc".source = ./files/.xinitrc;
 
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
