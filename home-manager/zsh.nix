@@ -4,6 +4,7 @@
         enable = true;
         enableSyntaxHighlighting = true;
         enableCompletion = true;
+        enableAutosuggestions = true;
         shellAliases = {
             ls="ls -a --color=auto";
 
