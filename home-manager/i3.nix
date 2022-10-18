@@ -62,6 +62,14 @@ in {
       separator = " ";
     };
     modules = {
+
+      "wireless _first_" = {
+        enable = false;
+      };
+      "ethernet _first_" = {
+        enable = false;
+      };
+
       "ethernet enp24s0" =  {
         enable = true;
         position = 0;
@@ -71,13 +79,17 @@ in {
         };
       };
 
-      "wireless wlp4s0" = {
+       "wireless wlp4s0" = {
+         enable = false;
+         position = 0;
+         settings = {
+           format_up = "W:(%quality %essid, %bitrate) %ip";
+           format_down = "W: down";
+         };
+       };
+
+      ipv6 = {
         enable = false;
-        position = 0;
-        settings = {
-          format_up = "W:(%quality %essid, %bitrate) %ip";
-          format_down = "W: down";
-        };
       };
 
       "battery all" = {
@@ -119,11 +131,11 @@ in {
         };
       };
 
-      "load" = {
+      load = {
         enable = true;
         position = 3;
         settings = {
-          format = "%usage";
+          format = "Load %1min";
         };
       };
 
