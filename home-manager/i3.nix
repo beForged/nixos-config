@@ -3,6 +3,8 @@
 let
   mod = "Mod1";
 in {
+  imports = [ ./polybar.nix ];
+
   xsession.windowManager.i3 = {
     enable = true;
     package = pkgs.i3-gaps;
@@ -46,15 +48,21 @@ in {
 
       bars = [
         {
-          position = "top";
-          statusCommand = "i3status";
-          fonts = [ "Source Code Pro" ];
+          command = "./home/scarlet/.config/polybar/launch.sh";
         }
       ];
+
+#      startup = [
+#        {
+#          command = "${pkgs.systemd}/bin/systemctl --user restart polybar";
+#          always = true;
+#          notification = false;
+#        }
+#      ];
     };
   };
   programs.i3status = {
-    enable = true;
+    enable = false;
     general = {
       output_format = "i3bar";
       colors = true;

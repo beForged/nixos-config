@@ -180,7 +180,8 @@ in
   environment.systemPackages = with pkgs; [
     vim 
 	pciutils # contains lspci
-    ntfs3g
+    psmisc # utils
+    ntfs3g # ntfs mounting
     fuse
     xdg-utils
     home-manager

@@ -14,8 +14,12 @@
 
   ];
 
-  home.file.".xinitrc".source = ./files/.xinitrc;
-  home.file.".config/picom.conf".source = ./files/picom.conf;
+  home.file = {
+    ".xinitrc".source = ./files/.xinitrc;
+    ".config/picom.conf".source = ./files/picom.conf;
+    ".config/polybar/launch.sh".source = ./files/launch-polybar.sh;
+  };
+
 
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
