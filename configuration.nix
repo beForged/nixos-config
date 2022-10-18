@@ -115,6 +115,7 @@ in
   	videoDrivers = [ "nvidia" ];
   
   
+    #window manager
   	windowManager.i3.package = pkgs.i3-gaps;
   	windowManager.i3.enable = true;
   	displayManager.startx.enable = true;
@@ -126,6 +127,7 @@ in
 	};
   };
 
+  #disenable sleep and stuff
   systemd.targets = {
   	sleep.enable = false;
   	suspend.enable = false;
@@ -189,6 +191,7 @@ in
 	google-chrome
 	tailscale
 
+    lutris
 
 	# graphics
 	glxinfo
