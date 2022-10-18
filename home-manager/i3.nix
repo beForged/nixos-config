@@ -139,6 +139,14 @@ in {
         };
       };
 
+      "volume master" = {
+        settings = {
+          device = "default";
+          format = "(%devicename): %volume";
+        };
+        position = 2;
+      };
+
       "memory" = {
         enable = true;
         position = 2;
