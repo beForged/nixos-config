@@ -15,6 +15,7 @@
   ];
 
   home.file.".xinitrc".source = ./files/.xinitrc;
+  home.file.".config/picom.conf".source = ./files/picom.conf;
 
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
