@@ -48,17 +48,17 @@ in {
 
       bars = [
         {
-          command = "./home/scarlet/.config/polybar/launch.sh";
+          command = "polybar -r top-main &";
         }
       ];
 
-#      startup = [
-#        {
-#          command = "${pkgs.systemd}/bin/systemctl --user restart polybar";
-#          always = true;
-#          notification = false;
-#        }
-#      ];
+      startup = [
+        {
+          command = "${pkgs.systemd}/bin/systemctl --user restart polybar";
+          always = true;
+          notification = false;
+        }
+      ];
     };
   };
   programs.i3status = {

@@ -56,6 +56,7 @@ in
 	extraGroups = [ 
 		"wheel"
 		"audio"
+        "video"
 	];
   };
 
@@ -64,6 +65,9 @@ in
   };
   home-manager.useUserPackages = true;
   home-manager.useGlobalPkgs = true;
+
+  #experimental features 
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # user packages
   users.users.scarlet.packages = with pkgs; [ 
@@ -91,6 +95,8 @@ in
 
 	# pdfslicer
 	zathura
+
+    sonic-pi
   ];
 
   # default shell specification
@@ -204,7 +210,7 @@ in
 	gnumake
 	gcc
 	git
-	racket-minimal
+	racket
 	# tracked in unstable
 	unstable.go 
 	heroku
@@ -212,6 +218,9 @@ in
 	jetbrains.idea-community
 	jdk11
     python3
+    flyctl
+    docker
+    sqlite
 
 	# ardour plugins
 	lv2
@@ -220,10 +229,9 @@ in
 	boops
 
 	# sound configuration
-	carla
-	cadence
 	pavucontrol 
     pulseaudio
+    ffmpeg
   ];
 
   xdg.mime.defaultApplications = {

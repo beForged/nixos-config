@@ -18,6 +18,8 @@
         fixed-center = false;
         line-size = "1";
 
+        font-0 = "Source Code Pro:size=11;1";
+
         padding-left = "1";
         padding-right = "1";
         module-margin-left = "1";
@@ -69,6 +71,7 @@
         label-urgent = "%index%";
         label-urgent-background = "#C37561";
         label-urgent-padding = "2";
+        label-active-font = "1";
       };
 
       "module/cpu" = {
@@ -76,11 +79,13 @@
         interval = "3";
         format = "<label>";
         label = "%percentage%%";
+        label-active-font = "1";
       };
 
       "module/sep" = {
         type = "custom/text";
         content = " | ";
+        label-active-font = "1";
       };
 
       "module/memory" = {
@@ -89,6 +94,7 @@
 
         format = "<label>";
         label = "%mb_used% | %mb_swap_used%";
+        label-active-font = "1";
       };
 
       "module/date" = {
@@ -98,6 +104,7 @@
         time = "at %H:%M";
         label = "%date% %time%";
         format-prefix-foreground = "#AB71FD";
+        label-active-font = "1";
       };
 
     };
@@ -107,6 +114,7 @@
       interval = 2
       exec = /home/scarlet/speaker.sh
       click-left = /home/scarlet/switch-audio.sh
+      label-active-font = 1
     '';
 
     script = "";
