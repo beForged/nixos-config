@@ -2,6 +2,7 @@
 
 let
   mod = "Mod1";
+  monitorScript = pkgs.callPackage ./scripts/monitor.nix {};
 in {
   imports = [ ./polybar.nix ];
 
@@ -48,7 +49,7 @@ in {
 
       bars = [
         {
-          command = "polybar -r top-main &";
+          command = " ${monitorScript}/bin/monitor";
         }
       ];
 
