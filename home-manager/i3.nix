@@ -13,6 +13,7 @@ in {
       modifier = mod;
       fonts = ["Source Code Pro"];
       terminal = "kitty";
+      defaultWorkspace = "1";
 
       # use defaults except specified overrides
       keybindings = lib.mkOptionDefault {
@@ -59,111 +60,9 @@ in {
           always = true;
           notification = false;
         }
+        { command = "firefox"; workspace = "2"; }
+        { command = "discord"; workspace = "1"; }
       ];
     };
-  };
-  programs.i3status = {
-    enable = false;
-    general = {
-      output_format = "i3bar";
-      colors = true;
-      interval = 5;
-      separator = " ";
-    };
-    modules = {
-
-      "wireless _first_" = {
-        enable = false;
-      };
-      "ethernet _first_" = {
-        enable = false;
-      };
-
-      "ethernet enp24s0" =  {
-        enable = true;
-        position = 0;
-        settings = {
-          format_up = "E: %ip (%speed)";
-          format_down = "E: down";
-        };
-      };
-
-       "wireless wlp4s0" = {
-         enable = false;
-         position = 0;
-         settings = {
-           format_up = "W:(%quality %essid, %bitrate) %ip";
-           format_down = "W: down";
-         };
-       };
-
-      ipv6 = {
-        enable = false;
-      };
-
-      "battery all" = {
-        enable = false;
-        position = 1;
-        settings = {
-          format = "%status %percentage %remaining ";
-          format_down = "No battery";
-          status_chr = "CHARGING";
-          status_bat = "DISCHARGING";
-          status_unk = "UNKNOWN";
-          status_full = "FULL";
-          path = "/sys/class/power_supply/BAT1/uevent";
-          low_threshold = 30;
-        };
-      };
-
-      "tztime local" =  {
-        enable = true;
-        position = 4;
-        settings = {
-          format = "%Y-%m-%d %H:%M";
-        };
-      };
-
-      "cpu_temperature 0" = {
-        enable = false;
-        settings = {
-          format = "T: %degrees°C";
-          path = "/sys/class/thermal/thermal_zone2/temp";
-        };
-      };
-
-      "disk /" = {
-        enable = true;
-        position = 1;
-        settings = {
-          format = "/ %avail";
-        };
-      };
-
-      load = {
-        enable = true;
-        position = 3;
-        settings = {
-          format = "Load %1min";
-        };
-      };
-
-      "volume master" = {
-        settings = {
-          device = "default";
-          format = "(%devicename): %volume";
-        };
-        position = 2;
-      };
-
-      "memory" = {
-        enable = true;
-        position = 2;
-        settings = {
-          format = "Free: %available";
-        };
-      };
-    };
-
   };
 }
