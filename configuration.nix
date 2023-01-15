@@ -6,10 +6,19 @@
 
   # list packages installed in system profile tracking unstable branch
 let
-	unstable = import <nixos-unstable> { config.allowUnfree = true; };
+  unstableTarball = builtins.fetchTarball "https://github.com/NixOS/nixpkgs-channels/archive/nixos-unstable.tar.gz";
+    # unstable = import <nixos-unstable> { config.allowUnfree = true; };
     home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-22.05.tar.gz";
 in 
 {
+  nixpkgs.config = {
+    packageOverrides = pkgs: {
+      unstable = import unstableTarball {
+        config = config.nixpkgs.config;
+      };
+    };
+  };
+
   imports =
     [ # Include the results of the hardware scan.
       /etc/nixos/hardware-configuration.nix
@@ -98,7 +107,7 @@ in
 
     sonic-pi
 
-    unstable.osu-lazer-bin
+    # unstable.osu-lazer-bin
   ];
 
   # default shell specification
@@ -215,7 +224,6 @@ in
 	racket
 	# tracked in unstable
 	unstable.go 
-	heroku
 	gopls
 	jetbrains.idea-community
 	jdk11
