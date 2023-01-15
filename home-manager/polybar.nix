@@ -118,6 +118,7 @@
 
       "module/title" = {
         type = "internal/xwindow";
+        label-maxlen = "50";
       };
 
     };
