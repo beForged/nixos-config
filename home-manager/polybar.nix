@@ -1,8 +1,5 @@
 {config, pkgs, lib, ...}:
 
-let
-  monitorScript = pkgs.callPackage ./scripts/monitor.nix {};
-in
 {
   services.polybar = {
     # home.packages = with pkgs; [ ethtool ];
@@ -19,7 +16,7 @@ in
         width = "100%";
         height = "20";
 
-        fixed-center = false;
+        fixed-center = true;
         line-size = "1";
 
         font-0 = "Source Code Pro:size=11;1";
@@ -29,9 +26,9 @@ in
         module-margin-left = "1";
         module-margin-right = "1";
 
-        modules-left = "i3";
+        modules-left = "i3 title";
         modules-center = "date";
-        modules-right = "speaker cpu memory"; #disk, network ?
+        modules-right = "speaker sep filesystem sep cpu sep memory"; 
 
         tray-position = "right";
         tray-detached = "false"; 
@@ -39,26 +36,26 @@ in
         wm-restack = "i3";
         cursor-click = "pointer";
       };
-      "bar/top-secondary" = {
-        monitor = "\${env:MONITOR:DP-4}";
-        width = "100%";
-        height = "20";
-
-        fixed-center = false;
-        line-size = "1";
-
-        padding-left = "1";
-        padding-right = "1";
-        module-margin-left = "1";
-        module-margin-right = "1";
-
-        modules-left = "i3";
-        modules-center = "date";
-        modules-right = "speaker";
-
-        wm-restack = "i3";
-        cursor-click = "pointer";
-      };
+#      "bar/top-secondary" = {
+#        monitor = "\${env:MONITOR:DP-4}";
+#        width = "100%";
+#        height = "20";
+#
+#        fixed-center = false;
+#        line-size = "1";
+#
+#        padding-left = "1";
+#        padding-right = "1";
+#        module-margin-left = "1";
+#        module-margin-right = "1";
+#
+#        modules-left = "i3";
+#        modules-center = "date";
+#        modules-right = "speaker";
+#
+#        wm-restack = "i3";
+#        cursor-click = "pointer";
+#      };
 
       "module/i3" = {
         type = "internal/i3";
@@ -82,9 +79,10 @@ in
       "module/cpu" = {
         type = "internal/cpu";
         interval = "3";
-        format = "<label>";
+        format = "Cpu: <label>";
         label = "%percentage%%";
         label-active-font = "1";
+        warn-percentage = "95";
       };
 
       "module/sep" = {
@@ -112,6 +110,16 @@ in
         label-active-font = "1";
       };
 
+      "module/filesystem" = {
+        type = "internal/fs";
+        mount-0 = "/";
+        interval = "10";
+      };
+
+      "module/title" = {
+        type = "internal/xwindow";
+      };
+
     };
     extraConfig =  ''
       [module/speaker] 
@@ -123,10 +131,6 @@ in
     '';
 
     script = ''
-      export MONITOR=$(${monitorScript}/bin/monitor)
-      echo "Running polybar on $MONITOR"
-      polybar top-main & disown
-      polybar top-secondary & disown
       '';
   };
 }
