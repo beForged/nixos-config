@@ -14,6 +14,10 @@ in {
       fonts = ["Source Code Pro"];
       terminal = "kitty";
       defaultWorkspace = "1";
+      assigns = {
+        "2" = [{ class = "firefox"; }];
+        "1" = [{ class = "discord"; }];
+      };
 
       # use defaults except specified overrides
       keybindings = lib.mkOptionDefault {
@@ -70,8 +74,6 @@ in {
           always = true;
           notification = false;
         }
-        { command = "firefox"; workspace = "1"; }
-        { command = "discord"; workspace = "2"; }
       ];
     };
   };
