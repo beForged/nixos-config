@@ -17,7 +17,6 @@
   home.file = {
     ".xinitrc".source = ./files/.xinitrc;
     ".config/picom.conf".source = ./files/picom.conf;
-    ".config/polybar/launch.sh".source = ./files/launch-polybar.sh;
   };
 
 
