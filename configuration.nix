@@ -152,22 +152,6 @@ in
   	hybrid-sleep.enable = false;
   };
 
-  # compositor - not sure anything other than enable = true does anything
-  # services.picom = {
-  #   enable = true;
-  #   experimentalBackends = true;
-  #   backend = "glx";
-  #   fade = true;
-  #   settings = {
-  #   	blur = { 
-  #   		method = "dual_kawase";
-  #   			size = 20;
-  #  			deviation = 5.0;
-  #   	};
-  #   };
-  #   inactiveOpacity = 0.8;
-  # };
-
   # Configure keymap in X11
   # services.xserver.layout = "us";
   # services.xserver.xkbOptions = "eurosign:e";
