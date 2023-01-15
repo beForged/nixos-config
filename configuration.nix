@@ -124,8 +124,8 @@ in
   
   
     #window manager
-  	windowManager.i3.package = pkgs.i3-gaps;
-  	windowManager.i3.enable = true;
+    # windowManager.i3.package = pkgs.i3-gaps;
+    # windowManager.i3.enable = true;
   	displayManager.startx.enable = true;
 
 	libinput = {
@@ -144,20 +144,20 @@ in
   };
 
   # compositor - not sure anything other than enable = true does anything
-  services.picom = {
-	enable = true;
-	experimentalBackends = true;
-	backend = "glx";
-	fade = true;
-	settings = {
-		blur = { 
-			method = "dual_kawase";
-    			size = 20;
-   			deviation = 5.0;
-		};
-	};
-	inactiveOpacity = 0.8;
-  };
+  # services.picom = {
+  #   enable = true;
+  #   experimentalBackends = true;
+  #   backend = "glx";
+  #   fade = true;
+  #   settings = {
+  #   	blur = { 
+  #   		method = "dual_kawase";
+  #   			size = 20;
+  #  			deviation = 5.0;
+  #   	};
+  #   };
+  #   inactiveOpacity = 0.8;
+  # };
 
   # Configure keymap in X11
   # services.xserver.layout = "us";

@@ -8,6 +8,8 @@
     ./vim.nix
     ./kitty.nix
     ./i3.nix
+    ./picom.nix
+    # ./hyprland.nix
   ];
 
   home.packages = [
