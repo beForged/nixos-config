@@ -2,6 +2,6 @@
 
 feh --bg-fill --randomize ~/pictures/*
 
-picom --experimental-backends &
+# picom --experimental-backends &
 
 exec i3

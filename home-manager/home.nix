@@ -18,7 +18,7 @@
 
   home.file = {
     ".xinitrc".source = ./files/.xinitrc;
-    ".config/picom.conf".source = ./files/picom.conf;
+    # ".config/picom.conf".source = ./files/picom.conf;
   };
 
 

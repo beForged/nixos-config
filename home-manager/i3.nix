@@ -56,12 +56,22 @@ in {
 
       startup = [
         {
+          command = "${pkgs.systemd}/bin/systemctl --user import-environment XAUTHORITY DISPLAY";
+          always = true;
+          notification = false;
+        }
+        {
           command = "${pkgs.systemd}/bin/systemctl --user restart polybar";
           always = true;
           notification = false;
         }
-        { command = "firefox"; workspace = "2"; }
-        { command = "discord"; workspace = "1"; }
+        {
+          command = "${pkgs.systemd}/bin/systemctl --user restart picom.service";
+          always = true;
+          notification = false;
+        }
+        { command = "firefox"; workspace = "1"; }
+        { command = "discord"; workspace = "2"; }
       ];
     };
   };
