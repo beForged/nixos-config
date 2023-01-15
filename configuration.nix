@@ -6,18 +6,18 @@
 
   # list packages installed in system profile tracking unstable branch
 let
-  unstableTarball = builtins.fetchTarball "https://github.com/NixOS/nixpkgs-channels/archive/nixos-unstable.tar.gz";
-    # unstable = import <nixos-unstable> { config.allowUnfree = true; };
-    home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-22.05.tar.gz";
+  # unstableTarball = builtins.fetchTarball "https://github.com/NixOS/nixpkgs-channels/archive/nixos-unstable.tar.gz";
+  unstable = import <nixos-unstable> { config.allowUnfree = true; };
+  home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/master.tar.gz";
 in 
 {
-  nixpkgs.config = {
-    packageOverrides = pkgs: {
-      unstable = import unstableTarball {
-        config = config.nixpkgs.config;
-      };
-    };
-  };
+  # nixpkgs.config = {
+  #   packageOverrides = pkgs: {
+  #     unstable = import unstableTarball {
+  #       config = config.nixpkgs.config;
+  #     };
+  #   };
+  # };
 
   imports =
     [ # Include the results of the hardware scan.
@@ -107,7 +107,7 @@ in
 
     sonic-pi
 
-    # unstable.osu-lazer-bin
+    unstable.osu-lazer-bin
   ];
 
   # default shell specification
