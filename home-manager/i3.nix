@@ -13,10 +13,10 @@ in {
       modifier = mod;
       fonts = ["Source Code Pro"];
       terminal = "kitty";
-      defaultWorkspace = "1";
+      defaultWorkspace = "2";
       assigns = {
-        "2" = [{ class = "firefox"; }];
-        "1" = [{ class = "discord"; }];
+        "1" = [{ class = "firefox"; }];
+        "2" = [{ class = "discord"; }];
       };
 
       # use defaults except specified overrides

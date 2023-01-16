@@ -4,26 +4,24 @@
   services.picom = {
     enable = true;
     # experimentalBackends = true;
+    package = pkgs.picom;
     backend = "glx";
     activeOpacity = 1;
+    inactiveOpacity = 0.85;
     fade = true;
+    fadeDelta = 3;
     vSync = false;
     settings = {
        blur = {
          method = "dual_kawase";
-         size = 20;
-         deviation = 5.0;
+         strength = 5;
        };
     };
-    # inactiveOpacity = 0.8;
-    opacityRule = [
-      "85:class_g = 'kitty'"
+    opacityRules = [
+      #"85:class_g = 'kitty'"
+      "85:class_g = 'kitty' && focused"
+      "75:class_g = 'kitty' && !focused"
       "85:class_g = 'polybar'"
     ];
-    # blur = true;
-      # "window_type = 'dock'"
-    # blurExclude = [
-    #   "window_type = 'desktop'"
-    # ];
   };
 }
