@@ -186,7 +186,6 @@ in
     fuse
     xdg-utils
     home-manager
-    wmctrl
 
 	# internet 
     wget

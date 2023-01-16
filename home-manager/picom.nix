@@ -7,7 +7,7 @@
     package = pkgs.picom-next;
     backend = "glx";
     activeOpacity = 1;
-    inactiveOpacity = 0.85;
+    inactiveOpacity = 0.9;
     fade = true;
     fadeDelta = 5;
     vSync = false;
@@ -18,8 +18,9 @@
        };
        corner-radius = 10;
        rounded-corners-exclude = [
-         "class_g = 'Bar'"
+         "class_g = 'Polybar'"
          "class_i = 'polybar'"
+         "class_i = 'tray'"
        ];
     };
     opacityRules = [
