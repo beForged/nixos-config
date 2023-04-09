@@ -24,8 +24,7 @@
        ];
     };
     opacityRules = [
-      #"85:class_g = 'kitty'"
-      "100:class_i = 'Toolkit' && class_g = 'firefox'"
+      "100:class_g = 'firefox'"
       "85:class_g = 'kitty' && focused"
       "75:class_g = 'kitty' && !focused"
       "85:class_i = 'polybar'"

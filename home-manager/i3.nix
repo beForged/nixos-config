@@ -15,8 +15,7 @@ in {
       terminal = "kitty";
       defaultWorkspace = "2";
       assigns = {
-        "1" = [{ class = "firefox"; }];
-        "2" = [{ class = "discord"; }];
+        "1" = [{ class = "discord"; }];
       };
 
       # use defaults except specified overrides

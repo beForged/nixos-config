@@ -33,7 +33,7 @@ in
   boot.loader.efi.canTouchEfiVariables = true;
 
   # select linux kernel
-  # boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   # networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -57,6 +57,19 @@ in
   #   font = "Lat2-Terminus16";
   #   keyMap = "us";
   # };
+
+  # security.sudo.extraRules = [{
+  #   runAs = "root";
+  #   groups = ["wheel"]; 
+  #   commands = [{ 
+  #     command = "run/current-system/sw/bin/shutdown"; 
+  #     options = ["NOPASSWD"]; 
+  #   }];
+  # }];
+
+  security.sudo.extraConfig = ''
+    %wheel  ALL=NOPASSWD: /run/current-system/sw/bin/shutdown
+  '';
 
   # user configuration - set password with passwd
   users.extraUsers.scarlet = {
@@ -85,6 +98,7 @@ in
 
 	streamlink
 	unstable.discord
+    unstable.armcord
 	keepassxc
 
 	neofetch
@@ -116,11 +130,12 @@ in
   };
 
   # shell
-  # programs.zsh.enable = true;
+  programs.zsh.enable = true;
 
 
   #steam
   programs.steam.enable = true;
+  hardware.opengl.enable = true;
   hardware.opengl.driSupport32Bit = true;
 
   # Enable the X11 windowing system.
