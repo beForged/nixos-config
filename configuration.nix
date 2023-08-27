@@ -108,7 +108,7 @@ in
 	shutter
 
 	spotify
-	youtube-dl
+	yt-dlp
 	mpv
 
 	ardour
