@@ -47,6 +47,17 @@ in
   networking.useDHCP = false;
   networking.interfaces.enp24s0.useDHCP = true;
 
+  networking.nameservers = [ "1.1.1.1#one.one.one.one" "1.0.0.1#one.one.one.one" ];
+  services.resolved = {
+    enable = true;
+    dnssec = "true";
+    domains = [ "~." ];
+    fallbackDns = [ "1.1.1.1#one.one.one.one" "1.0.0.1#one.one.one.one" ];
+    extraConfig = ''
+      DNSOverTLS=yes
+    '';
+  };
+
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
@@ -91,6 +102,11 @@ in
   #experimental features 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
+  # allowed for r2modman (lethal company) 14/12/2023
+  nixpkgs.config.permittedInsecurePackages = [
+    "electron-25.9.0"
+  ];
+
   # user packages
   users.users.scarlet.packages = with pkgs; [ 
 	kitty
@@ -122,6 +138,8 @@ in
     sonic-pi
 
     unstable.osu-lazer-bin
+    #steam mods
+    r2modman
   ];
 
   # default shell specification
