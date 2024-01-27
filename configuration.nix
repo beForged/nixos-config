@@ -122,6 +122,7 @@ in
 
 	pinta
 	shutter
+    foliate
 
 	spotify
 	yt-dlp
@@ -142,6 +143,7 @@ in
     r2modman
 
     obsidian
+
   ];
 
   # default shell specification
