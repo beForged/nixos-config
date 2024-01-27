@@ -140,6 +140,8 @@ in
     unstable.osu-lazer-bin
     #steam mods
     r2modman
+
+    obsidian
   ];
 
   # default shell specification
