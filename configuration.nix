@@ -189,6 +189,20 @@ in
   	hybrid-sleep.enable = false;
   };
 
+  systemd.services.git-daemon = {
+    enable = true;
+    description = "git daemon to serve obsidian vault";
+    unitConfig = {
+    };
+    serviceConfig = {
+      Type = "simple";
+      User = "scarlet";
+      ExecStart = "${pkgs.git}/bin/git daemon --reuseaddr /home/scarlet/vault/vault";
+    };
+    wantedBy = [ "multi-user.target" ];
+    after = [ "network.target" ];
+  };
+
   # Configure keymap in X11
   # services.xserver.layout = "us";
   # services.xserver.xkbOptions = "eurosign:e";
