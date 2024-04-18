@@ -132,6 +132,7 @@ in
 	# sox
 	# easyeffects
 	helvum
+    audacity
 
 	# pdfslicer
 	zathura
@@ -144,6 +145,8 @@ in
 
     obsidian
 
+    #game
+    godot_4
   ];
 
   # default shell specification
