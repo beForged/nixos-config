@@ -32,6 +32,8 @@
             hdmiright="xrandr --output DP-2 --auto --right-of eDP-1";
 
             wallpaper="feh --bg-fill --randomize ~/pictures/*";
+
+            restartpipewire="systemctl --user restart wireplumber pipewire pipewire-pulse";
         };
         initExtra = ''
             export LV2_PATH=/home/scarlet/.lv2:/home/scarlet/.nix-profile/lib/lv2:/run/current-system/sw/lib/lv2
