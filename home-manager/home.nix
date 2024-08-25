@@ -1,7 +1,8 @@
-{ config, pkgs, ... }:
-
 {
-
+  config,
+  pkgs,
+  ...
+}: {
   imports = [
     ./zsh.nix
     ./git.nix
@@ -13,14 +14,12 @@
   ];
 
   home.packages = [
-
   ];
 
   home.file = {
     ".xinitrc".source = ./files/.xinitrc;
     # ".config/picom.conf".source = ./files/picom.conf;
   };
-
 
   # Home Manager needs a bit of information about you and the
   # paths it should manage.

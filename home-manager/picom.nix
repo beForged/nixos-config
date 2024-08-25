@@ -1,6 +1,9 @@
 # unused for now
-{ lib, pkgs, ... }:
 {
+  lib,
+  pkgs,
+  ...
+}: {
   services.picom = {
     enable = true;
     # experimentalBackends = true;
@@ -12,16 +15,16 @@
     fadeDelta = 5;
     vSync = false;
     settings = {
-       blur = {
-         method = "dual_kawase";
-         strength = 5;
-       };
-       corner-radius = 10;
-       rounded-corners-exclude = [
-         "class_g = 'Polybar'"
-         "class_i = 'polybar'"
-         "class_i = 'tray'"
-       ];
+      blur = {
+        method = "dual_kawase";
+        strength = 5;
+      };
+      corner-radius = 10;
+      rounded-corners-exclude = [
+        "class_g = 'Polybar'"
+        "class_i = 'polybar'"
+        "class_i = 'tray'"
+      ];
     };
     opacityRules = [
       "100:class_g = 'firefox'"

@@ -1,10 +1,13 @@
-{ lib, config, pkgs, ... }:
-
-let
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}: let
   mod = "Mod1";
   monitorScript = pkgs.callPackage ./scripts/monitor.nix {};
 in {
-  imports = [ ./polybar.nix ];
+  imports = [./polybar.nix];
 
   xsession.windowManager.i3 = {
     enable = true;
@@ -15,7 +18,7 @@ in {
       terminal = "kitty";
       defaultWorkspace = "2";
       assigns = {
-        "1" = [{ class = "discord"; }];
+        "1" = [{class = "discord";}];
       };
 
       # use defaults except specified overrides

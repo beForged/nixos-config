@@ -1,7 +1,6 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   home.sessionVariables = {
-    TERMINAL="kitty";
+    TERMINAL = "kitty";
   };
   programs.kitty = {
     enable = true;

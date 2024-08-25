@@ -1,16 +1,17 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ config, pkgs, ... }:
-
-  # list packages installed in system profile tracking unstable branch
+{
+  config,
+  pkgs,
+  ...
+}:
+# list packages installed in system profile tracking unstable branch
 let
   # unstableTarball = builtins.fetchTarball "https://github.com/NixOS/nixpkgs-channels/archive/nixos-unstable.tar.gz";
-  unstable = import <nixos-unstable> { config.allowUnfree = true; };
+  unstable = import <nixos-unstable> {config.allowUnfree = true;};
   home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/master.tar.gz";
-in 
-{
+in {
   # nixpkgs.config = {
   #   packageOverrides = pkgs: {
   #     unstable = import unstableTarball {
@@ -19,11 +20,11 @@ in
   #   };
   # };
 
-  imports =
-    [ # Include the results of the hardware scan.
-      /etc/nixos/hardware-configuration.nix
-      (import "${home-manager}/nixos")
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    /etc/nixos/hardware-configuration.nix
+    (import "${home-manager}/nixos")
+  ];
 
   #allow dirty unfree software (like steam)
   nixpkgs.config.allowUnfree = true;
@@ -47,12 +48,12 @@ in
   networking.useDHCP = false;
   networking.interfaces.enp24s0.useDHCP = true;
 
-  networking.nameservers = [ "1.1.1.1#one.one.one.one" "1.0.0.1#one.one.one.one" ];
+  networking.nameservers = ["1.1.1.1#one.one.one.one" "1.0.0.1#one.one.one.one"];
   services.resolved = {
     enable = true;
     dnssec = "true";
-    domains = [ "~." ];
-    fallbackDns = [ "1.1.1.1#one.one.one.one" "1.0.0.1#one.one.one.one" ];
+    domains = ["~."];
+    fallbackDns = ["1.1.1.1#one.one.one.one" "1.0.0.1#one.one.one.one"];
     extraConfig = ''
       DNSOverTLS=yes
     '';
@@ -71,10 +72,10 @@ in
 
   # security.sudo.extraRules = [{
   #   runAs = "root";
-  #   groups = ["wheel"]; 
-  #   commands = [{ 
-  #     command = "run/current-system/sw/bin/shutdown"; 
-  #     options = ["NOPASSWD"]; 
+  #   groups = ["wheel"];
+  #   commands = [{
+  #     command = "run/current-system/sw/bin/shutdown";
+  #     options = ["NOPASSWD"];
   #   }];
   # }];
 
@@ -84,23 +85,23 @@ in
 
   # user configuration - set password with passwd
   users.extraUsers.scarlet = {
-	isNormalUser = true;
-	home = "/home/scarlet";
-	extraGroups = [ 
-		"wheel"
-		"audio"
-        "video"
-	];
+    isNormalUser = true;
+    home = "/home/scarlet";
+    extraGroups = [
+      "wheel"
+      "audio"
+      "video"
+    ];
   };
 
   home-manager.users.scarlet = {
-    imports = [./home-manager/home.nix ];
+    imports = [./home-manager/home.nix];
   };
   home-manager.useUserPackages = true;
   home-manager.useGlobalPkgs = true;
 
-  #experimental features 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  #experimental features
+  nix.settings.experimental-features = ["nix-command" "flakes"];
 
   # allowed for r2modman (lethal company) 14/12/2023
   nixpkgs.config.permittedInsecurePackages = [
@@ -108,34 +109,34 @@ in
   ];
 
   # user packages
-  users.users.scarlet.packages = with pkgs; [ 
-	kitty
-	ranger
+  users.users.scarlet.packages = with pkgs; [
+    kitty
+    ranger
 
-	streamlink
-	unstable.discord
+    streamlink
+    unstable.discord
     unstable.armcord
-	keepassxc
+    keepassxc
 
-	neofetch
-	gotop
+    neofetch
+    gotop
 
-	pinta
-	shutter
+    pinta
+    shutter
     foliate
 
-	spotify
-	yt-dlp
-	mpv
+    spotify
+    yt-dlp
+    mpv
 
-	ardour
-	# sox
-	# easyeffects
-	helvum
+    ardour
+    # sox
+    # easyeffects
+    helvum
     audacity
 
-	# pdfslicer
-	zathura
+    # pdfslicer
+    zathura
 
     sonic-pi
 
@@ -151,12 +152,11 @@ in
 
   # default shell specification
   users.users.scarlet = {
-	shell = pkgs.zsh;
+    shell = pkgs.zsh;
   };
 
   # shell
   programs.zsh.enable = true;
-
 
   #steam
   programs.steam.enable = true;
@@ -165,31 +165,29 @@ in
 
   # Enable the X11 windowing system.
   services.xserver = {
-  	enable = true;
-  	autorun = false;
-  	exportConfiguration = true;
+    enable = true;
+    autorun = false;
+    exportConfiguration = true;
 
-  	videoDrivers = [ "nvidia" ];
-  
-  
+    videoDrivers = ["nvidia"];
+
     #window manager
     # windowManager.i3.package = pkgs.i3-gaps;
     # windowManager.i3.enable = true;
-  	displayManager.startx.enable = true;
+    displayManager.startx.enable = true;
 
-	libinput = {
-		enable = true;
-		mouse.accelProfile = "flat";
-
-	};
+    libinput = {
+      enable = true;
+      mouse.accelProfile = "flat";
+    };
   };
 
   #disenable sleep and stuff
   systemd.targets = {
-  	sleep.enable = false;
-  	suspend.enable = false;
-  	hibernate.enable = false;
-  	hybrid-sleep.enable = false;
+    sleep.enable = false;
+    suspend.enable = false;
+    hibernate.enable = false;
+    hybrid-sleep.enable = false;
   };
 
   systemd.services.git-daemon = {
@@ -202,8 +200,8 @@ in
       User = "scarlet";
       ExecStart = "${pkgs.git}/bin/git daemon --reuseaddr /home/scarlet/vault/vault";
     };
-    wantedBy = [ "multi-user.target" ];
-    after = [ "network.target" ];
+    wantedBy = ["multi-user.target"];
+    after = ["network.target"];
   };
 
   # Configure keymap in X11
@@ -219,20 +217,19 @@ in
   hardware.pulseaudio.enable = false;
   # disable pulseaudio for pipewire - want to fix mic sound
   services.pipewire = {
-	enable = true;
-	alsa = {
-		enable = true;
-		support32Bit = true;
-	};
-	pulse.enable = true;
-	jack.enable = true;
+    enable = true;
+    alsa = {
+      enable = true;
+      support32Bit = true;
+    };
+    pulse.enable = true;
+    jack.enable = true;
   };
 
-
-  # List packages installed in system profile. 
+  # List packages installed in system profile.
   environment.systemPackages = with pkgs; [
-    vim 
-	pciutils # contains lspci
+    vim
+    pciutils # contains lspci
     psmisc # utils
     ntfs3g # ntfs mounting
     fuse
@@ -240,49 +237,49 @@ in
     home-manager
     alejandra # linter
 
-	# internet 
+    # internet
     wget
     firefox
-	google-chrome
-	tailscale
+    google-chrome
+    tailscale
 
     lutris
 
-	# graphics
-	glxinfo
-	feh
+    # graphics
+    glxinfo
+    feh
 
-	############
-	#dev tools #
-	############
-	gnumake
-	gcc
-	git
-	racket
-	# tracked in unstable
-	unstable.go 
-	gopls
-	jetbrains.idea-community
-	jdk11
+    ############
+    #dev tools #
+    ############
+    gnumake
+    gcc
+    git
+    racket
+    # tracked in unstable
+    unstable.go
+    gopls
+    jetbrains.idea-community
+    jdk11
     python3
     flyctl
     docker
     sqlite
 
-	# ardour plugins
-	lv2
-	x42-plugins
-	tunefish
-	boops
+    # ardour plugins
+    lv2
+    x42-plugins
+    tunefish
+    boops
 
-	# sound configuration
-	pavucontrol 
+    # sound configuration
+    pavucontrol
     pulseaudio
     ffmpeg
   ];
 
   xdg.mime.defaultApplications = {
-	"application/pdf" = "firefox.desktop";
+    "application/pdf" = "firefox.desktop";
   };
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -297,8 +294,8 @@ in
 
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
- 
-  # Enable the OpenSSH server 
+
+  # Enable the OpenSSH server
   # services.sshd.enable = true;
 
   # Open ports in the firewall.
@@ -314,6 +311,4 @@ in
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "21.11"; # Did you read the comment?
-
 }
-
