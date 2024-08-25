@@ -216,8 +216,6 @@ in
   # tailscale enable
   services.tailscale.enable = true;
 
-  # Enable sound.
-  sound.enable = false;
   hardware.pulseaudio.enable = false;
   # disable pulseaudio for pipewire - want to fix mic sound
   services.pipewire = {
@@ -240,6 +238,7 @@ in
     fuse
     xdg-utils
     home-manager
+    alejandra # linter
 
 	# internet 
     wget
