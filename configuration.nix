@@ -230,6 +230,36 @@ in {
     };
     pulse.enable = true;
     jack.enable = true;
+    extraConfig.pipewire."99-deepfilter-mono-source" = {
+      "context.modules" = [
+        {
+          "name" = "libpipewire-module-filter-chain";
+          "args" = {
+            "filter.graph" = {
+              "nodes" = [
+                {
+                  "type" = "ladspa";
+                  "name" = "DeepFilter Mono";
+                  "plugin" = "${pkgs.deepfilternet}/lib/ladspa/libdeep_filter_ladspa.so";
+                  "label" = "deep_filter_mono";
+                  "control" = {
+                    "Attenuation Limit (dB)" = 100;
+                  };
+                }
+              ];
+            };
+            "audio.position" = ["MONO"];
+            "audio.rate" = "48000";
+            "capture.props" = {
+              "node.passive" = true;
+            };
+            "playback.props" = {
+              "media.class" = "Audio/Source";
+            };
+          };
+        }
+      ];
+    };
   };
 
   # List packages installed in system profile.
@@ -279,10 +309,12 @@ in {
     boops
 
     # sound configuration
+    pulseaudio # needed for pactl
     pavucontrol
     ffmpeg
 
     deepfilternet
+    ladspa-sdk
 
     #jellyfin pkgs
     pkgs.jellyfin
