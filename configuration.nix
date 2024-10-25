@@ -131,7 +131,6 @@ in {
 
     ardour
     # sox
-    # easyeffects
     helvum
     audacity
 
@@ -145,10 +144,17 @@ in {
     r2modman
 
     obsidian
+    anki
 
     #game
     godot_4
   ];
+
+  # enable jellyfin
+  services.jellyfin = {
+    enable = true;
+    user = "scarlet";
+  };
 
   # default shell specification
   users.users.scarlet = {
@@ -239,7 +245,7 @@ in {
 
     # internet
     wget
-    firefox
+    firefox-bin
     google-chrome
     tailscale
 
@@ -274,8 +280,14 @@ in {
 
     # sound configuration
     pavucontrol
-    pulseaudio
     ffmpeg
+
+    deepfilternet
+
+    #jellyfin pkgs
+    pkgs.jellyfin
+    pkgs.jellyfin-web
+    pkgs.jellyfin-ffmpeg
   ];
 
   xdg.mime.defaultApplications = {
