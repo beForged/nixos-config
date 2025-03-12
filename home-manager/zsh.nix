@@ -1,9 +1,9 @@
 {pkgs, ...}: {
   programs.zsh = {
     enable = true;
-    enableSyntaxHighlighting = true;
+    syntaxHighlighting.enable = true;
     enableCompletion = true;
-    enableAutosuggestions = true;
+    autosuggestion.enable = true;
     shellAliases = {
       ls = "ls -a --color=auto";
 

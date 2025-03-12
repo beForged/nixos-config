@@ -59,6 +59,18 @@ in {
     '';
   };
 
+  services.adguardhome = {
+    enable = true;
+    openFirewall = false;
+    port = 3000;
+    settings = {
+      #http.address = "127.0.0.1:9001";
+      dns.bind_host = "192.168.86.20";
+      dns.port = 3001;
+      schema_version = 20;
+    };
+  };
+
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
@@ -166,8 +178,8 @@ in {
 
   #steam
   programs.steam.enable = true;
-  hardware.opengl.enable = true;
-  hardware.opengl.driSupport32Bit = true;
+  hardware.graphics.enable = true;
+  hardware.graphics.enable32Bit = true;
 
   # Enable the X11 windowing system.
   services.xserver = {
@@ -182,11 +194,12 @@ in {
     # windowManager.i3.enable = true;
     displayManager.startx.enable = true;
 
-    libinput = {
+  };
+
+  services.libinput = {
       enable = true;
       mouse.accelProfile = "flat";
     };
-  };
 
   #disenable sleep and stuff
   systemd.targets = {
