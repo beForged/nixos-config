@@ -34,7 +34,8 @@ in {
   boot.loader.efi.canTouchEfiVariables = true;
 
   # select linux kernel
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  # use default lts, latest kernel may cause issues w nvidia (add _latest for latest kernel)
+  boot.kernelPackages = pkgs.linuxPackages;
 
   # networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -196,6 +197,12 @@ in {
 
   };
 
+  hardware.nvidia = {
+    powerManagement.enable = true;
+
+    open = true;
+  };
+
   services.libinput = {
       enable = true;
       mouse.accelProfile = "flat";
@@ -318,7 +325,6 @@ in {
     # ardour plugins
     lv2
     x42-plugins
-    tunefish
     boops
 
     # sound configuration
