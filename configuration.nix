@@ -240,7 +240,7 @@ in {
   # tailscale enable
   services.tailscale.enable = true;
 
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   # disable pulseaudio for pipewire - want to fix mic sound
   services.pipewire = {
     enable = true;
