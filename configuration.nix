@@ -135,6 +135,7 @@ in {
     gotop
 
     pinta
+    kdePackages.kolourpaint
     shutter
     foliate
 
@@ -157,7 +158,7 @@ in {
     r2modman
 
     obsidian
-    anki
+    anki-bin
 
     #game
     godot_4

@@ -4,4 +4,5 @@ feh --bg-fill --randomize ~/pictures/*
 
 # picom --experimental-backends &
 
-exec i3
+# 25 mb ram for debug log
+exec i3 --shmlog-size=26214400
