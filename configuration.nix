@@ -195,7 +195,6 @@ in {
     # windowManager.i3.package = pkgs.i3-gaps;
     # windowManager.i3.enable = true;
     displayManager.startx.enable = true;
-
   };
 
   hardware.nvidia = {
@@ -205,9 +204,9 @@ in {
   };
 
   services.libinput = {
-      enable = true;
-      mouse.accelProfile = "flat";
-    };
+    enable = true;
+    mouse.accelProfile = "flat";
+  };
 
   #disenable sleep and stuff
   systemd.targets = {
@@ -234,6 +233,10 @@ in {
   # Configure keymap in X11
   # services.xserver.layout = "us";
   # services.xserver.xkbOptions = "eurosign:e";
+
+  fonts.packages = with pkgs; [
+    noto-fonts-cjk-sans
+  ];
 
   # Enable CUPS to print documents.
   # services.printing.enable = true;
@@ -343,6 +346,9 @@ in {
 
     #kvm
     input-leap
+
+    #font
+    noto-fonts-cjk-sans
   ];
 
   xdg.mime.defaultApplications = {
@@ -366,7 +372,7 @@ in {
   # services.sshd.enable = true;
 
   # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [ 24800 ];
+  networking.firewall.allowedTCPPorts = [24800];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
