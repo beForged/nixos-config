@@ -61,7 +61,7 @@ in {
   };
 
   services.adguardhome = {
-    enable = true;
+    enable = false;
     openFirewall = false;
     port = 3000;
     settings = {
@@ -216,19 +216,48 @@ in {
     hybrid-sleep.enable = false;
   };
 
-  systemd.services.git-daemon = {
+  #  systemd.services.git-daemon = {
+  #    enable = true;
+  #    description = "git daemon to serve obsidian vault";
+  #    unitConfig = {
+  #    };
+  #    serviceConfig = {
+  #      Type = "simple";
+  #      User = "scarlet";
+  #      ExecStart = "${pkgs.git}/bin/git daemon --reuseaddr /home/scarlet/vault/vault";
+  #    };
+  #    wantedBy = ["multi-user.target"];
+  #    after = ["network.target"];
+  #  };
+
+  # run git server to serve obsidian vault ++ 
+  services.forgejo = {
     enable = true;
-    description = "git daemon to serve obsidian vault";
-    unitConfig = {
+    user = "git";
+    group = "git";
+    settings = {
+      server = {
+        DOMAIN = "forgejo.nixos.tail097e5.ts.net";
+        ROOT_URL = "http://forgejo.nixos.tail097e5.ts.net";
+        HTTP_PORT = 3001;
+      };
+      service = {
+        DISABLE_REGISTRATION = true;
+      };
     };
-    serviceConfig = {
-      Type = "simple";
-      User = "scarlet";
-      ExecStart = "${pkgs.git}/bin/git daemon --reuseaddr /home/scarlet/vault/vault";
-    };
-    wantedBy = ["multi-user.target"];
-    after = ["network.target"];
   };
+  # create git user for forgejo
+  users.users.git = {
+    isSystemUser = true;
+    group = "git";
+    home = "/var/lib/forgejo";
+  };
+
+  users.groups.git = {};
+  # mount tempfile for forgejo
+  systemd.tmpfiles.rules = [
+    "d /var/lib/forgejo/custom 0755 git git - -"
+  ];
 
   # Configure keymap in X11
   # services.xserver.layout = "us";
