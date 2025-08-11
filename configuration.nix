@@ -61,13 +61,13 @@ in {
   };
 
   services.adguardhome = {
-    enable = false;
+    enable = true;
     openFirewall = false;
     port = 3000;
     settings = {
       #http.address = "127.0.0.1:9001";
       dns.bind_host = "192.168.86.20";
-      dns.port = 3001;
+      dns.port = 3005;
       schema_version = 20;
     };
   };
@@ -168,6 +168,11 @@ in {
   services.jellyfin = {
     enable = true;
     user = "scarlet";
+  };
+
+  services.deluge = {
+    enable = true;
+    web.enable = true;
   };
 
   # default shell specification
@@ -320,6 +325,7 @@ in {
     vim
     pciutils # contains lspci
     psmisc # utils
+    dig
     ntfs3g # ntfs mounting
     fuse
     xdg-utils
@@ -384,6 +390,11 @@ in {
     "application/pdf" = "firefox.desktop";
   };
 
+  fileSystems."/mnt" = {
+    device = "UUID=2618B8A018B87083";
+    fsType = "ntfs";
+    options = ["defaults"];
+  };
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
