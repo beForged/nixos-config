@@ -63,7 +63,7 @@ in {
   services.adguardhome = {
     enable = true;
     openFirewall = false;
-    port = 3000;
+    port = 3001;
     settings = {
       #http.address = "127.0.0.1:9001";
       dns.bind_host = "192.168.86.20";
@@ -221,41 +221,27 @@ in {
     hybrid-sleep.enable = false;
   };
 
-  #  systemd.services.git-daemon = {
-  #    enable = true;
-  #    description = "git daemon to serve obsidian vault";
-  #    unitConfig = {
-  #    };
-  #    serviceConfig = {
-  #      Type = "simple";
-  #      User = "scarlet";
-  #      ExecStart = "${pkgs.git}/bin/git daemon --reuseaddr /home/scarlet/vault/vault";
-  #    };
-  #    wantedBy = ["multi-user.target"];
-  #    after = ["network.target"];
-  #  };
-
-  # run git server to serve obsidian vault ++ 
+  # run git server to serve obsidian vault ++
   services.forgejo = {
     enable = true;
     user = "git";
     group = "git";
     settings = {
       server = {
-        DOMAIN = "forgejo.nixos.tail097e5.ts.net";
-        ROOT_URL = "http://forgejo.nixos.tail097e5.ts.net";
-        HTTP_PORT = 3001;
-      };
-      service = {
-        DISABLE_REGISTRATION = true;
+        DOMAIN = "nixos.tail097e5.ts.net";
+        ROOT_URL = "http://nixos.tail097e5.ts.net/forgejo";
+        HTTP_PORT = 3000;
+        SSH_PORT = 2222;
       };
     };
   };
+
   # create git user for forgejo
   users.users.git = {
     isSystemUser = true;
     group = "git";
     home = "/var/lib/forgejo";
+    shell = pkgs.bash;
   };
 
   users.groups.git = {};
@@ -263,6 +249,60 @@ in {
   systemd.tmpfiles.rules = [
     "d /var/lib/forgejo/custom 0755 git git - -"
   ];
+
+  services.traefik = {
+    enable = true;
+
+    staticConfigOptions = {
+      entryPoints = {
+        web = {
+          address = ":80";
+          asDefault = true;
+        };
+        traefik = {
+          address = ":8080"; # Enable dashboard endpoint
+        };
+      };
+
+      api = {
+        dashboard = true;
+        insecure = true;
+      };
+
+      log = {
+        level = "INFO";
+        filePath = "${config.services.traefik.dataDir}/traefik.log";
+        format = "json";
+      };
+    };
+
+    dynamicConfigOptions = {
+      http = {
+        routers = {
+          forgejo = {
+            rule = "Host(`nixos.tail097e5.ts.net`) && PathPrefix(`/forgejo`)";
+            service = "forgejo";
+            entryPoints = ["web"];
+            middlewares = ["strip-forgejo-prefix"];
+          };
+        };
+        middlewares = {
+          strip-forgejo-prefix = {
+            stripPrefix.prefixes = ["/forgejo"];
+          };
+        };
+        services = {
+          forgejo = {
+            loadBalancer.servers = [
+              {
+                url = "http://127.0.0.1:3000";
+              }
+            ];
+          };
+        };
+      };
+    };
+  };
 
   # Configure keymap in X11
   # services.xserver.layout = "us";
@@ -326,6 +366,7 @@ in {
     pciutils # contains lspci
     psmisc # utils
     dig
+    busybox
     ntfs3g # ntfs mounting
     fuse
     xdg-utils
@@ -406,14 +447,31 @@ in {
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
+  services.openssh = {
+    enable = true;
+    ports = [22 2222];
+    listenAddresses = [
+      {
+        addr = "127.0.0.1";
+        port = 2222;
+      }
+      {
+        addr = "100.111.74.101";
+        port = 2222;
+      }
+    ];
+  };
 
   # Enable the OpenSSH server
   # services.sshd.enable = true;
 
   # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [24800];
-  # networking.firewall.allowedUDPPorts = [ ... ];
+  networking.firewall = {
+    # for input leap
+    allowedTCPPorts = [24800];
+    interfaces.tailscale0.allowedTCPPorts = [2222];
+    # networking.firewall.allowedUDPPorts = [ ... ];
+  };
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
