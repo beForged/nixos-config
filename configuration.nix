@@ -250,6 +250,19 @@ in {
     "d /var/lib/forgejo/custom 0755 git git - -"
   ];
 
+  services.grafana = {
+    enable = true;
+    settings = {
+      server = {
+        http_addr = "127.0.0.1";
+        http_port = 3333;
+        domain = "nixos.tail097e5.ts.net";
+        root_url = "http://nixos.tail097e5.ts.net/grafana";
+        serve_from_sub_path = true;
+      };
+    };
+  };
+
   services.traefik = {
     enable = true;
 
@@ -285,6 +298,11 @@ in {
             entryPoints = ["web"];
             middlewares = ["strip-forgejo-prefix"];
           };
+          grafana = {
+            rule = "Host(`nixos.tail097e5.ts.net`) && PathPrefix(`/grafana`)";
+            service = "grafana";
+            entryPoints = ["web"];
+          };
         };
         middlewares = {
           strip-forgejo-prefix = {
@@ -296,6 +314,13 @@ in {
             loadBalancer.servers = [
               {
                 url = "http://127.0.0.1:3000";
+              }
+            ];
+          };
+          grafana = {
+            loadBalancer.servers = [
+              {
+                url = "http://127.0.0.1:3333";
               }
             ];
           };
