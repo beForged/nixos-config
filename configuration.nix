@@ -24,6 +24,7 @@ in {
     # Include the results of the hardware scan.
     /etc/nixos/hardware-configuration.nix
     (import "${home-manager}/nixos")
+    ./selfhost.nix
   ];
 
   #allow dirty unfree software (like steam)
@@ -60,18 +61,6 @@ in {
     '';
   };
 
-  services.adguardhome = {
-    enable = true;
-    openFirewall = false;
-    port = 3001;
-    settings = {
-      #http.address = "127.0.0.1:9001";
-      dns.bind_host = "192.168.86.20";
-      dns.port = 3005;
-      schema_version = 20;
-    };
-  };
-
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
@@ -82,15 +71,6 @@ in {
   #   font = "Lat2-Terminus16";
   #   keyMap = "us";
   # };
-
-  # security.sudo.extraRules = [{
-  #   runAs = "root";
-  #   groups = ["wheel"];
-  #   commands = [{
-  #     command = "run/current-system/sw/bin/shutdown";
-  #     options = ["NOPASSWD"];
-  #   }];
-  # }];
 
   security.sudo.extraConfig = ''
     %wheel  ALL=NOPASSWD: /run/current-system/sw/bin/shutdown
@@ -164,16 +144,6 @@ in {
     godot_4
   ];
 
-  # enable jellyfin
-  services.jellyfin = {
-    enable = true;
-    user = "scarlet";
-  };
-
-  services.deluge = {
-    enable = true;
-    web.enable = true;
-  };
 
   # default shell specification
   users.users.scarlet = {
@@ -221,114 +191,6 @@ in {
     hybrid-sleep.enable = false;
   };
 
-  # run git server to serve obsidian vault ++
-  services.forgejo = {
-    enable = true;
-    user = "git";
-    group = "git";
-    settings = {
-      server = {
-        DOMAIN = "nixos.tail097e5.ts.net";
-        ROOT_URL = "http://nixos.tail097e5.ts.net/forgejo";
-        HTTP_PORT = 3000;
-        SSH_PORT = 2222;
-      };
-    };
-  };
-
-  # create git user for forgejo
-  users.users.git = {
-    isSystemUser = true;
-    group = "git";
-    home = "/var/lib/forgejo";
-    shell = pkgs.bash;
-  };
-
-  users.groups.git = {};
-  # mount tempfile for forgejo
-  systemd.tmpfiles.rules = [
-    "d /var/lib/forgejo/custom 0755 git git - -"
-  ];
-
-  services.grafana = {
-    enable = true;
-    settings = {
-      server = {
-        http_addr = "127.0.0.1";
-        http_port = 3333;
-        domain = "nixos.tail097e5.ts.net";
-        root_url = "http://nixos.tail097e5.ts.net/grafana";
-        serve_from_sub_path = true;
-      };
-    };
-  };
-
-  services.traefik = {
-    enable = true;
-
-    staticConfigOptions = {
-      entryPoints = {
-        web = {
-          address = ":80";
-          asDefault = true;
-        };
-        traefik = {
-          address = ":8080"; # Enable dashboard endpoint
-        };
-      };
-
-      api = {
-        dashboard = true;
-        insecure = true;
-      };
-
-      log = {
-        level = "INFO";
-        filePath = "${config.services.traefik.dataDir}/traefik.log";
-        format = "json";
-      };
-    };
-
-    dynamicConfigOptions = {
-      http = {
-        routers = {
-          forgejo = {
-            rule = "Host(`nixos.tail097e5.ts.net`) && PathPrefix(`/forgejo`)";
-            service = "forgejo";
-            entryPoints = ["web"];
-            middlewares = ["strip-forgejo-prefix"];
-          };
-          grafana = {
-            rule = "Host(`nixos.tail097e5.ts.net`) && PathPrefix(`/grafana`)";
-            service = "grafana";
-            entryPoints = ["web"];
-          };
-        };
-        middlewares = {
-          strip-forgejo-prefix = {
-            stripPrefix.prefixes = ["/forgejo"];
-          };
-        };
-        services = {
-          forgejo = {
-            loadBalancer.servers = [
-              {
-                url = "http://127.0.0.1:3000";
-              }
-            ];
-          };
-          grafana = {
-            loadBalancer.servers = [
-              {
-                url = "http://127.0.0.1:3333";
-              }
-            ];
-          };
-        };
-      };
-    };
-  };
-
   # Configure keymap in X11
   # services.xserver.layout = "us";
   # services.xserver.xkbOptions = "eurosign:e";
@@ -353,36 +215,6 @@ in {
     };
     pulse.enable = true;
     jack.enable = true;
-    extraConfig.pipewire."99-deepfilter-mono-source" = {
-      "context.modules" = [
-        {
-          "name" = "libpipewire-module-filter-chain";
-          "args" = {
-            "filter.graph" = {
-              "nodes" = [
-                {
-                  "type" = "ladspa";
-                  "name" = "DeepFilter Mono";
-                  "plugin" = "${pkgs.deepfilternet}/lib/ladspa/libdeep_filter_ladspa.so";
-                  "label" = "deep_filter_mono";
-                  "control" = {
-                    "Attenuation Limit (dB)" = 100;
-                  };
-                }
-              ];
-            };
-            "audio.position" = ["MONO"];
-            "audio.rate" = "48000";
-            "capture.props" = {
-              "node.passive" = true;
-            };
-            "playback.props" = {
-              "media.class" = "Audio/Source";
-            };
-          };
-        }
-      ];
-    };
   };
 
   # List packages installed in system profile.
@@ -403,8 +235,6 @@ in {
     firefox-bin
     google-chrome
     tailscale
-
-    lutris
 
     # graphics
     glxinfo
