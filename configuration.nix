@@ -144,7 +144,6 @@ in {
     godot_4
   ];
 
-
   # default shell specification
   users.users.scarlet = {
     shell = pkgs.zsh;
@@ -198,6 +197,15 @@ in {
   fonts.packages = with pkgs; [
     noto-fonts-cjk-sans
   ];
+
+  i18n.inputMethod = {
+    enable = true;
+    type = "fcitx5";
+    fcitx5.addons = with pkgs; [
+      fcitx5-hangul
+      fcitx5-gtk
+    ];
+  };
 
   # Enable CUPS to print documents.
   # services.printing.enable = true;
@@ -280,6 +288,8 @@ in {
 
     #font
     noto-fonts-cjk-sans
+
+    fcitx5
   ];
 
   xdg.mime.defaultApplications = {
