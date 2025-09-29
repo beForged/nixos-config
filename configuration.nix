@@ -133,7 +133,6 @@ in {
 
     sonic-pi
 
-    unstable.osu-lazer-bin
     #steam mods
     r2modman
 
@@ -142,6 +141,8 @@ in {
 
     #game
     godot_4
+
+    circumflex
   ];
 
   # default shell specification
@@ -264,6 +265,7 @@ in {
     flyctl
     docker
     sqlite
+    dbeaver-bin
 
     # ardour plugins
     lv2
