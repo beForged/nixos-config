@@ -118,6 +118,11 @@
     dynamicConfigOptions = {
       http = {
         routers = {
+          homepage = {
+            rule = "Host(`nixos.tail097e5.ts.net`) && PathPrefix(`/`)";
+            entryPoints = ["web"];
+            service = "homepage";
+          };
           forgejo = {
             rule = "Host(`nixos.tail097e5.ts.net`) && PathPrefix(`/forgejo`)";
             service = "forgejo";
@@ -129,13 +134,38 @@
             service = "grafana";
             entryPoints = ["web"];
           };
+          jellyfin = {
+            rule = "Host(`nixos.tail097e5.ts.net`) && PathPrefix(`/jellyfin`)";
+            service = "jellyfin";
+            entryPoints = ["web"];
+            middlewares = ["strip-jellyfin-prefix"];
+          };
+          traefik-dash = {
+            rule = "Host(`nixos.tail097e5.ts.net`) && PathPrefix(`/traefik`)";
+            service = "traefik";
+            entryPoints = ["web"];
+            middlewares = ["strip-traefik-dash-prefix"];
+          };
         };
         middlewares = {
           strip-forgejo-prefix = {
             stripPrefix.prefixes = ["/forgejo"];
           };
+          strip-jellyfin-prefix = {
+            stripPrefix.prefixes = ["/jellyfin"];
+          };
+          strip-traefik-dash-prefix = {
+            stripPrefix.prefixes = ["/traefik"];
+          };
         };
         services = {
+          homepage = {
+            loadBalancer.servers = [
+              {
+                url = "http://127.0.0.1:9100";
+              }
+            ];
+          };
           forgejo = {
             loadBalancer.servers = [
               {
@@ -147,6 +177,20 @@
             loadBalancer.servers = [
               {
                 url = "http://127.0.0.1:3333";
+              }
+            ];
+          };
+          jellyfin = {
+            loadBalancer.servers = [
+              {
+                url = "http://127.0.0.1:8096";
+              }
+            ];
+          };
+          traefik= {
+            loadBalancer.servers = [
+              {
+                url = "http://127.0.0.1:8080";
               }
             ];
           };
