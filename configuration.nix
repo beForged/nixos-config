@@ -28,7 +28,10 @@ in {
   ];
 
   #allow dirty unfree software (like steam)
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config = {
+    allowUnfree = true;
+    # cudaSupport = true; # might cause a lot of rebuilding since cachix doesnt have cuda bins
+  };
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -266,6 +269,9 @@ in {
     docker
     sqlite
     dbeaver-bin
+    (blender.override {
+        cudaSupport = true;
+    })
 
     # ardour plugins
     lv2
