@@ -296,8 +296,6 @@ in {
 
     #font
     noto-fonts-cjk-sans
-
-    fcitx5
   ];
 
   xdg.mime.defaultApplications = {
