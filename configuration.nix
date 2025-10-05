@@ -270,7 +270,7 @@ in {
     sqlite
     dbeaver-bin
     (blender.override {
-        cudaSupport = true;
+      cudaSupport = true;
     })
 
     # ardour plugins
