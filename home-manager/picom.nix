@@ -7,7 +7,7 @@
   services.picom = {
     enable = true;
     # experimentalBackends = true;
-    package = pkgs.picom-next;
+    package = pkgs.picom;
     backend = "glx";
     activeOpacity = 1;
     inactiveOpacity = 0.9;

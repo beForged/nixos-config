@@ -146,6 +146,8 @@ in {
     godot_4
 
     circumflex
+
+    actual-server
   ];
 
   # default shell specification
@@ -249,7 +251,7 @@ in {
     tailscale
 
     # graphics
-    glxinfo
+    mesa-demos
     feh
 
     ############
@@ -262,7 +264,6 @@ in {
     # tracked in unstable
     unstable.go
     gopls
-    jetbrains.idea-community
     jdk11
     python3
     flyctl
