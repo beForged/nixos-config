@@ -48,6 +48,12 @@
 
   # --------------------------
 
+  services.actual = {
+    enable = true;
+  };
+
+  # --------------------------
+
   # enable jellyfin
   services.jellyfin = {
     enable = true;
