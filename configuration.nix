@@ -139,6 +139,8 @@ in {
     #steam mods
     r2modman
 
+    prismlauncher
+
     obsidian
     anki-bin
 

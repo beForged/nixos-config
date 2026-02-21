@@ -146,6 +146,12 @@
             entryPoints = ["web"];
             middlewares = ["strip-traefik-dash-prefix"];
           };
+          actual-budget = {
+            rule = "Host(`nixos.tail097e5.ts.net`) && PathPrefix(`/money`)";
+            service = "actual";
+            entryPoints = ["web"];
+            middlewares = ["strip-actual-prefix"];
+          };
         };
         middlewares = {
           strip-forgejo-prefix = {
@@ -156,6 +162,9 @@
           };
           strip-traefik-dash-prefix = {
             stripPrefix.prefixes = ["/traefik"];
+          };
+          strip-actual-prefix = {
+            stripPrefix.prefixes = ["/money"];
           };
         };
         services = {
@@ -191,6 +200,13 @@
             loadBalancer.servers = [
               {
                 url = "http://127.0.0.1:8080";
+              }
+            ];
+          };
+          actual = {
+            loadBalancer.servers = [
+              {
+                url = "http://127.0.0.1:5006";
               }
             ];
           };
