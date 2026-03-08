@@ -147,6 +147,8 @@ in {
     circumflex
 
     actual-server
+
+    llama-cpp
   ];
 
   # default shell specification
