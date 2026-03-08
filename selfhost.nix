@@ -50,6 +50,9 @@
 
   services.actual = {
     enable = true;
+    settings = {
+      port = 5006;
+    };
   };
 
   # --------------------------
@@ -72,6 +75,7 @@
   services.grafana = {
     enable = true;
     settings = {
+      security.secret_key = "random-string";
       server = {
         http_addr = "127.0.0.1";
         http_port = 3333;
