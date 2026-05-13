@@ -11,11 +11,11 @@
       i3Support = true;
       pulseSupport = true;
     };
-    config = {
+    settings = {
       "settings" = {screenchange-reload = "true";};
 
       "bar/top-main" = {
-        monitor = "\${env:MONITOR:DP-2}";
+        monitor = "\${env:MONITOR:DP-0}";
         width = "100%";
         height = "20";
 
@@ -31,10 +31,10 @@
 
         modules-left = "i3 title";
         modules-center = "date";
-        modules-right = "speaker sep filesystem sep cpu sep memory";
+        modules-right = "sep filesystem sep cpu sep memory";
 
-        tray-position = "right";
-        tray-detached = "false";
+        # tray-position = "right";
+        # tray-detached = "false";
 
         wm-restack = "i3";
         cursor-click = "pointer";
@@ -124,16 +124,23 @@
         label-maxlen = "50";
       };
     };
-    extraConfig = ''
-      [module/speaker]
-      type = custom/script
-      interval = 2
-      exec = /home/scarlet/speaker.sh
-      click-left = /home/scarlet/switch-audio.sh
-      label-active-font = 1
-    '';
+    #    extraConfig = ''
+    #      [module/speaker]
+    #      type = custom/script
+    #      interval = 2
+    #      exec = /home/scarlet/speaker.sh
+    #      click-left = /home/scarlet/switch-audio.sh
+    #      label-active-font = 1
+    #    '';
 
     script = ''
+      killall -q polybar
+
+      while pgrep -x polybar >/dev/null; do sleep 1; done
+
+      for m in $(xrandr --query | grep " connected" | cut -d" " -f1); do
+      MONITOR=$m polybar top-main &
+      done
     '';
   };
 }

@@ -12,14 +12,22 @@
   }: {
     nixosConfigurations.scarlet = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
+
+      specialArgs = {
+        inherit home-manager;
+      };
+
       modules = [
         ./configuration.nix
+
+        home-manager.nixosModules.home-manager
+        {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+
+          home-manager.users.scarlet = import ./home-manager/home.nix;
+        }
       ];
-    };
-    homeConfigurations.scarlet = home-manager.users.user {
-      home.file = "/home/scarlet";
-      # Add the path to your Home Manager configuration file here
-      homeManagerConfigurations = {my-home-manager = ./home-manager/home.nix;};
     };
   };
 }
