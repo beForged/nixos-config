@@ -15,7 +15,7 @@
   ];
 
   home.packages = with pkgs; [
-    rofi-wayland
+    rofi
     swww
     grim
     slurp
