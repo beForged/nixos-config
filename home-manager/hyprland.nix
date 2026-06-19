@@ -77,12 +77,6 @@ in
         "3"
       ];
 
-      windowrulev2 = [
-        "workspace 1,class:^(discord)$"
-        "opacity 0.85 0.75,class:^(kitty)$"
-        "opacity 1.0 1.0,class:^(firefox)$"
-      ];
-
       bind = [
         "$mainMod,h,movefocus,l"
         "$mainMod,j,movefocus,d"
@@ -112,5 +106,11 @@ in
         "$mainMod SHIFT,3,movetoworkspace,3"
       ];
     };
+
+    extraConfig = ''
+      windowrule = workspace 1,class:^(discord)$
+      windowrule = opacity 0.85 0.75,class:^(kitty)$
+      windowrule = opacity 1.0 1.0,class:^(firefox)$
+    '';
   };
 }
