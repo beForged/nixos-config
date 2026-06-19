@@ -1,5 +1,21 @@
 { pkgs, ... }:
 
+let
+  wallpaper-switcher = pkgs.writeShellScript "wallpaper-switcher" ''
+    WALLPAPER_DIR="$HOME/pictures"
+    MONITORS=$(${pkgs.hyprland}/bin/hyprctl monitors -j | ${pkgs.jq}/bin/jq -r '.[].name')
+
+    IMAGES=$(find "$WALLPAPER_DIR" -type f \( -name "*.jpg" -o -name "*.jpeg" -o -name "*.png" -o -name "*.webp" \) | shuf -n 2)
+
+    i=0
+    for monitor in $MONITORS; do
+      WALL=$(echo "$IMAGES" | sed -n "$((i+1))p")
+      [ -z "$WALL" ] && WALL=$(echo "$IMAGES" | head -1)
+      ${pkgs.swww}/bin/swww img -o "$monitor" --transition-type grow --transition-duration 2 "$WALL"
+      i=$((i+1))
+    done
+  '';
+in
 {
   wayland.windowManager.hyprland = {
     enable = true;
@@ -11,12 +27,20 @@
 
       exec-once = [
         "fcitx5 -d"
+        "eww open bar"
+        "swww-daemon && ${wallpaper-switcher}"
+        "mako"
+        "${pkgs.kdePackages.polkit-kde-agent-1}/libexec/polkit-kde-authentication-agent-1"
       ];
-      # "systemctl --user restart waybar"
 
       input = {
         kb_layout = "us";
         follow_mouse = 1;
+        accel_profile = "flat";
+      };
+
+      cursor = {
+        no_hardware_cursors = true;
       };
 
       general = {
@@ -36,6 +60,9 @@
           size = 5;
           passes = 2;
         };
+
+        active_opacity = 1.0;
+        inactive_opacity = 0.9;
       };
 
       animations.enabled = true;
@@ -52,6 +79,8 @@
 
       windowrulev2 = [
         "workspace 1,class:^(discord)$"
+        "opacity 0.85 0.75,class:^(kitty)$"
+        "opacity 1.0 1.0,class:^(firefox)$"
       ];
 
       bind = [
@@ -68,6 +97,9 @@
         "$mainMod,TAB,workspace,previous"
 
         "$mainMod,RETURN,exec,kitty"
+
+        "$mainMod,D,exec,rofi -show drun -show-icons"
+        "$mainMod SHIFT,S,exec,grim -g \"$(slurp)\" - | wl-copy"
 
         "$mainMod,Q,killactive"
 

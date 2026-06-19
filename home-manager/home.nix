@@ -10,14 +10,23 @@
     ./kitty.nix
     #./i3.nix
     #./picom.nix
-     ./hyprland.nix
+    ./hyprland.nix
+    ./eww.nix
   ];
 
-  home.packages = [
+  home.packages = with pkgs; [
+    rofi-wayland
+    swww
+    grim
+    slurp
+    wl-clipboard
+    mako
+    xdg-desktop-portal-hyprland
+    kdePackages.polkit-kde-agent-1
   ];
 
   home.file = {
-    ".xinitrc".source = ./files/.xinitrc;
+    # ".xinitrc".source = ./files/.xinitrc;
     # ".config/picom.conf".source = ./files/picom.conf;
   };
 

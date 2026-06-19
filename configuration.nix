@@ -113,7 +113,7 @@ in {
     gotop
 
     kdePackages.kolourpaint
-    shutter
+    # shutter
     foliate
     darktable
 
@@ -267,7 +267,7 @@ in {
     # graphics
     mesa-demos
     nvidia-vaapi-driver
-    feh
+    # feh
 
     ############
     #dev tools #
