@@ -27,7 +27,7 @@ in
 
       exec-once = [
         "fcitx5 -d"
-        "eww open bar"
+        "${pkgs.eww}/bin/eww open bar"
         "swww-daemon && ${wallpaper-switcher}"
         "mako"
         "${pkgs.kdePackages.polkit-kde-agent-1}/libexec/polkit-kde-authentication-agent-1"
@@ -108,9 +108,9 @@ in
     };
 
     extraConfig = ''
-      windowrule = workspace 1,class:^(discord)$
-      windowrule = opacity 0.85 0.75,class:^(kitty)$
-      windowrule = opacity 1.0 1.0,class:^(firefox)$
+      windowrule = workspace 1, class:discord
+      windowrule = opacity 0.85 0.75, class:kitty
+      windowrule = opacity 1.0 1.0, class:firefox
     '';
   };
 }
