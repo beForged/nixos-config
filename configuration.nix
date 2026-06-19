@@ -163,21 +163,35 @@ in {
   hardware.graphics.enable = true;
   hardware.graphics.enable32Bit = true;
 
+  # enable hyprland wayland
+  programs.hyprland = {
+    enable = true;
+    xwayland.enable = true;
+  };
+
+  environment.sessionVariables = {
+    NIXOS_OZONE_WL = "1";
+    MOZ_ENABLE_WAYLAND = "1";
+    LIBVA_DRIVER_NAME = "nvidia";
+    NVD_BACKEND = "direct";
+  };
+
   # Enable the X11 windowing system.
   services.xserver = {
     enable = true;
-    autorun = false;
-    exportConfiguration = true;
+    # autorun = false;
+    # exportConfiguration = true;
 
     videoDrivers = ["nvidia"];
 
     #window manager
     # windowManager.i3.package = pkgs.i3-gaps;
     # windowManager.i3.enable = true;
-    displayManager.startx.enable = true;
+    # displayManager.startx.enable = true;
   };
 
   hardware.nvidia = {
+    modesetting.enable = true;
     powerManagement.enable = true;
 
     open = true;

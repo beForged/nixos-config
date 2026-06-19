@@ -8,9 +8,9 @@
     ./git.nix
     ./vim.nix
     ./kitty.nix
-    ./i3.nix
-    ./picom.nix
-    # ./hyprland.nix
+    #./i3.nix
+    #./picom.nix
+     ./hyprland.nix
   ];
 
   home.packages = [
@@ -21,12 +21,20 @@
     # ".config/picom.conf".source = ./files/picom.conf;
   };
 
+
+
   home.sessionVariables = {
     GTK_IM_MODULE = "fcitx";
     QT_IM_MODULE = "fcitx";
     XMODIFIERS = "@im=fcitx";
-    INPUT_METHOD = "fcitx";
-    SDL_IM_MODULE = "fcitx";
+
+    NIXOS_OZONE_WL = "1";
+    MOZ_ENABLE_WAYLAND = "1";
+
+    LIBVA_DRIVER_NAME = "nvidia";
+    NVD_BACKEND = "direct";
+    # INPUT_METHOD = "fcitx";
+    # SDL_IM_MODULE = "fcitx";
   };
 
   # Home Manager needs a bit of information about you and the

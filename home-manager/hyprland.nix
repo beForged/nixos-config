@@ -1,24 +1,18 @@
-{
-  config,
-  pkgs,
-  ...
-}: let
-  flake-compat = builtins.fetchTarball "https://github.com/edolstra/flake-compat/archive/master.tar.gz";
-  hyprland =
-    (import flake-compat {
-      src = builtins.fetchTarball "https://github.com/hyprwm/Hyprland/archive/master.tar.gz";
-    })
-    .defaultNix;
-in {
-  imports = [
-    hyprland.homeManagerModules.default
-  ];
+{ pkgs, ... }:
 
+{
   wayland.windowManager.hyprland = {
     enable = true;
 
     settings = {
+      "$mainMod" = "ALT";
+
       monitor = ",preferred,auto,1";
+
+      exec-once = [
+        "fcitx5 -d"
+      ];
+      # "systemctl --user restart waybar"
 
       input = {
         kb_layout = "us";
@@ -28,36 +22,62 @@ in {
       general = {
         gaps_in = 15;
         gaps_out = 8;
+
         border_size = 0;
+
+        layout = "dwindle";
       };
 
       decoration = {
-        rounding = 0;
+        rounding = 10;
+
         blur = {
-          enabled = false;
+          enabled = true;
+          size = 5;
+          passes = 2;
         };
       };
 
+      animations.enabled = true;
+
+      dwindle = {
+        preserve_split = true;
+      };
+
+      workspace = [
+        "1"
+        "2"
+        "3"
+      ];
+
+      windowrulev2 = [
+        "workspace 1,class:^(discord)$"
+      ];
+
       bind = [
-      # movement (like i3 hjkl)
-      "SUPER, h, movefocus, l"
-      "SUPER, j, movefocus, d"
-      "SUPER, k, movefocus, u"
-      "SUPER, l, movefocus, r"
+        "$mainMod,h,movefocus,l"
+        "$mainMod,j,movefocus,d"
+        "$mainMod,k,movefocus,u"
+        "$mainMod,l,movefocus,r"
 
-      # move windows
-      "SUPER SHIFT, h, movewindow, l"
-      "SUPER SHIFT, j, movewindow, d"
-      "SUPER SHIFT, k, movewindow, u"
-      "SUPER SHIFT, l, movewindow, r"
+        "$mainMod SHIFT,h,movewindow,l"
+        "$mainMod SHIFT,j,movewindow,d"
+        "$mainMod SHIFT,k,movewindow,u"
+        "$mainMod SHIFT,l,movewindow,r"
 
-      # terminal
-      "SUPER, Return, exec, kitty"
+        "$mainMod,TAB,workspace,previous"
 
-      # workspace switching
-      "SUPER, 1, workspace, 1"
-      "SUPER, 2, workspace, 2"
-      "SUPER, Tab, workspace, previous"
+        "$mainMod,RETURN,exec,kitty"
+
+        "$mainMod,Q,killactive"
+
+        "$mainMod,1,workspace,1"
+        "$mainMod,2,workspace,2"
+        "$mainMod,3,workspace,3"
+
+        "$mainMod SHIFT,1,movetoworkspace,1"
+        "$mainMod SHIFT,2,movetoworkspace,2"
+        "$mainMod SHIFT,3,movetoworkspace,3"
       ];
     };
   };

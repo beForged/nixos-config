@@ -40,8 +40,10 @@
       export LV2_PATH=/home/scarlet/.lv2:/home/scarlet/.nix-profile/lib/lv2:/run/current-system/sw/lib/lv2
       autoload -U colors && colors
       PS1="%{$fg[red]%}%n%{$reset_color%}@%{$fg[blue]%}%m %{$fg[yellow]%}%~ %{$reset_color%}%% "
-      if [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then
-          exec startx
+
+       # ---- Hyprland autostart on TTY1 ----
+      if [ -z "$DISPLAY" ] && [ -z "$WAYLAND_DISPLAY" ] && [ "$(tty)" = "/dev/tty1" ]; then
+        exec Hyprland
       fi
     '';
   };
