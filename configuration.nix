@@ -102,9 +102,12 @@ in {
   users.users.scarlet.packages = with pkgs; [
     kitty
     ranger
+    glow
 
     streamlink
     keepassxc
+
+    rustdesk-flutter
 
     fastfetch
     gotop
@@ -117,6 +120,8 @@ in {
     spotify
     yt-dlp
     mpv
+    mkvtoolnix
+    whisper-cpp-vulkan
 
     ardour
     # sox
@@ -247,6 +252,7 @@ in {
 
     # graphics
     mesa-demos
+    nvidia-vaapi-driver
     feh
 
     ############
