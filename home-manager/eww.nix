@@ -102,6 +102,10 @@
       margin-left: 12px;
     }
 
+    .ws-active, .ws-inactive {
+      min-width: 20px;
+    }
+
     .ws-active {
       color: #ffffff;
       font-weight: bold;
