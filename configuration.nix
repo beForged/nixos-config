@@ -84,11 +84,6 @@ in {
     ];
   };
 
-  home-manager.users.scarlet = {
-    imports = [./home-manager/home.nix];
-  };
-  home-manager.useUserPackages = true;
-  home-manager.useGlobalPkgs = true;
 
   #experimental features
   nix.settings.experimental-features = ["nix-command" "flakes"];
