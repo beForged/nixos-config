@@ -23,12 +23,12 @@
     (deflisten workspaces :initial "[]"
       `${pkgs.writeShellScript "get-workspaces" ''
         spaces() {
-          ESSION=$(${pkgs.hyprland}/bin/hyprctl workspaces -j | ${pkgs.jq}/bin/jq -c '[.[] | .id] | sort')
+          SESSION=$(${pkgs.hyprland}/bin/hyprctl workspaces -j | ${pkgs.jq}/bin/jq -c '[.[] | .id] | sort')
           ACTIVE=$(${pkgs.hyprland}/bin/hyprctl activeworkspace -j | ${pkgs.jq}/bin/jq '.id')
           echo "{\"all\": $SESSION, \"active\": $ACTIVE}"
         }
         spaces
-        ${pkgs.socat}/bin/socat -u UNIX-CONNECT:"/$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock" - | while read -r line; do
+        ${pkgs.socat}/bin/socat -u UNIX-CONNECT:"$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock" - | while read -r line; do
           spaces
         done
       ''}`)

@@ -23,11 +23,16 @@ in
     settings = {
       "$mainMod" = "ALT";
 
+      env = [
+        "XCURSOR_THEME,Vanilla-DMZ"
+        "XCURSOR_SIZE,24"
+      ];
+
       monitor = ",preferred,auto,1";
 
       exec-once = [
         "fcitx5 -d"
-        "${pkgs.eww}/bin/eww open bar"
+        "sleep 1 && ${pkgs.eww}/bin/eww open bar"
         "swww-daemon && ${wallpaper-switcher}"
         "mako"
         "${pkgs.kdePackages.polkit-kde-agent-1}/libexec/polkit-kde-authentication-agent-1"
@@ -71,12 +76,6 @@ in
         preserve_split = true;
       };
 
-      workspace = [
-        "1"
-        "2"
-        "3"
-      ];
-
       bind = [
         "$mainMod,h,movefocus,l"
         "$mainMod,j,movefocus,d"
@@ -108,9 +107,9 @@ in
     };
 
     extraConfig = ''
-      windowrule = workspace 1, class:discord
-      windowrule = opacity 0.85 0.75, class:kitty
-      windowrule = opacity 1.0 1.0, class:firefox
+      windowrulev2 = workspace 1, class:^(discord)$
+      windowrulev2 = opacity 0.85 0.75, class:^(kitty)$
+      windowrulev2 = opacity 1.0 1.0, class:^(firefox)$
     '';
   };
 }

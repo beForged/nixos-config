@@ -14,6 +14,13 @@
     ./eww.nix
   ];
 
+  home.pointerCursor = {
+    name = "Vanilla-DMZ";
+    package = pkgs.vanilla-dmz;
+    size = 24;
+    gtk.enable = true;
+  };
+
   home.packages = with pkgs; [
     rofi
     swww
@@ -42,8 +49,9 @@
 
     LIBVA_DRIVER_NAME = "nvidia";
     NVD_BACKEND = "direct";
-    # INPUT_METHOD = "fcitx";
-    # SDL_IM_MODULE = "fcitx";
+
+    XCURSOR_THEME = "Vanilla-DMZ";
+    XCURSOR_SIZE = "24";
   };
 
   # Home Manager needs a bit of information about you and the
