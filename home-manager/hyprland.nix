@@ -30,7 +30,10 @@ in
         "XCURSOR_SIZE,24"
       ];
 
-      monitor = ",preferred,auto,1";
+      monitor = [
+        "DP-1,2560x1440@75,0x0,1"
+        "DP-2,1920x1080@144,2560x0,1"
+      ];
 
       exec-once = [
         "fcitx5 -d"
