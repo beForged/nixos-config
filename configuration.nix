@@ -1,4 +1,4 @@
-# Edit this configuration file to define what should be installed on
+# Edet this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 {
@@ -167,7 +167,9 @@ in {
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";
     MOZ_ENABLE_WAYLAND = "1";
+    MOZ_DISABLE_RDD_SANDBOX = "1";
     LIBVA_DRIVER_NAME = "nvidia";
+    CUDA_DISABLE_PERF_BOOST = "1";
     NVD_BACKEND = "direct";
   };
 
@@ -255,7 +257,7 @@ in {
 
     # internet
     wget
-    firefox-bin
+    firefox
     google-chrome
     tailscale
 
