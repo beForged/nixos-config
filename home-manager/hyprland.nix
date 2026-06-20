@@ -109,9 +109,8 @@ in
     };
 
     extraConfig = ''
-      windowrule = workspace 1, class:discord
-      windowrule = opacity 0.85 0.75, class:kitty
-      windowrule = opacity 1.0 1.0, class:firefox
+      windowrule = opacity 0.85 0.75, match:class kitty
+      windowrule = opacity 1.0 1.0, match:class firefox
     '';
   };
 }
