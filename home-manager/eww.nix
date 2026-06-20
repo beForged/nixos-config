@@ -23,9 +23,6 @@
     (defpoll gpu :interval "3s"
       `nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader,nounits | awk '{print int($1)}'`)
 
-    (defpoll vram :interval "5s"
-      `nvidia-smi --query-gpu=memory.used,memory.total --format=csv,noheader,nounits | awk -F', ' '{printf "%dMB/%dMB", $1, $2}'`)
-
 
     (deflisten workspaces :initial "[]"
       `${pkgs.writeShellScript "get-workspaces" ''
@@ -64,16 +61,14 @@
         (label :text "|")
         (label :text "Gpu: ''${gpu}%")
         (label :text "|")
-        (label :text "Vram: ''${vram}")
-        (label :text "|")
         (label :text "Disk: ''${disk}")))
 
     (defwidget bar []
       (centerbox :orientation "h"
-        (workspaces)
-        (box :orientation "h" :spacing 16 :halign "center"
-          (label :class "time" :text time)
+        (box :orientation "h" :spacing 16 :halign "start"
+          (workspaces)
           (label :class "active-window" :text active-window :limit-width 40))
+        (label :class "time" :text time)
         (metrics)))
 
     (defwindow bar
