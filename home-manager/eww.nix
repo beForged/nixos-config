@@ -46,7 +46,7 @@
       ''}`)
 
     (defwidget workspaces []
-      (box :class "workspaces" :orientation "h" :spacing 8 :halign "start"
+      (box :class "workspaces" :orientation "h" :spacing 8 :halign "start" :width 100
         (for ws in {workspaces.all}
           (button
             :class {ws == workspaces.active ? "ws-active" : "ws-inactive"}
