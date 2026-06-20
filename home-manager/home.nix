@@ -23,7 +23,7 @@
 
   home.packages = with pkgs; [
     rofi
-    swww
+    awww
     grim
     slurp
     wl-clipboard

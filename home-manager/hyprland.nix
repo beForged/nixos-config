@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 let
-  wallpaper-switcher = pkgs.writeShellScript "wallpaper-switcher" ''
+  wallpaper-switcher = pkgs.writeShellScriptBin "wallpaper-switcher" ''
     WALLPAPER_DIR="$HOME/pictures"
     MONITORS=$(${pkgs.hyprland}/bin/hyprctl monitors -j | ${pkgs.jq}/bin/jq -r '.[].name')
 
@@ -11,12 +11,14 @@ let
     for monitor in $MONITORS; do
       WALL=$(echo "$IMAGES" | sed -n "$((i+1))p")
       [ -z "$WALL" ] && WALL=$(echo "$IMAGES" | head -1)
-      ${pkgs.swww}/bin/swww img -o "$monitor" --transition-type grow --transition-duration 2 "$WALL"
+      ${pkgs.awww}/bin/awww img -o "$monitor" --transition-type grow --transition-duration 2 "$WALL"
       i=$((i+1))
     done
   '';
 in
 {
+  home.packages = [ wallpaper-switcher ];
+
   wayland.windowManager.hyprland = {
     enable = true;
 
@@ -33,7 +35,7 @@ in
       exec-once = [
         "fcitx5 -d"
         "sleep 1 && ${pkgs.eww}/bin/eww open bar"
-        "swww-daemon && ${wallpaper-switcher}"
+        "awww-daemon && ${wallpaper-switcher}/bin/wallpaper-switcher"
         "mako"
         "${pkgs.kdePackages.polkit-kde-agent-1}/libexec/polkit-kde-authentication-agent-1"
       ];
