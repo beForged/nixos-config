@@ -49,9 +49,6 @@
 
     LIBVA_DRIVER_NAME = "nvidia";
     NVD_BACKEND = "direct";
-
-    XCURSOR_THEME = "Vanilla-DMZ";
-    XCURSOR_SIZE = "24";
   };
 
   # Home Manager needs a bit of information about you and the
