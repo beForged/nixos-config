@@ -15,8 +15,8 @@
   ];
 
   home.pointerCursor = {
-    name = "Vanilla-DMZ";
-    package = pkgs.vanilla-dmz;
+    name = "Posy_Cursor_Black";
+    package = pkgs.posy-cursors;
     size = 24;
     gtk.enable = true;
   };

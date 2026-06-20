@@ -26,7 +26,7 @@ in
       "$mainMod" = "ALT";
 
       env = [
-        "XCURSOR_THEME,Vanilla-DMZ"
+        "XCURSOR_THEME,Posy_Cursor_Black"
         "XCURSOR_SIZE,24"
       ];
 
