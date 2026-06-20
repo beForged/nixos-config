@@ -34,7 +34,7 @@ in
 
       exec-once = [
         "fcitx5 -d"
-        "sleep 1 && ${pkgs.eww}/bin/eww open bar"
+        "sleep 1 && ${pkgs.eww}/bin/eww open bar && ${pkgs.eww}/bin/eww open bar1"
         "awww-daemon && ${wallpaper-switcher}/bin/wallpaper-switcher"
         "mako"
         "${pkgs.kdePackages.polkit-kde-agent-1}/libexec/polkit-kde-authentication-agent-1"

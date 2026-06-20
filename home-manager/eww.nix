@@ -20,6 +20,13 @@
     (defpoll disk :interval "30s"
       `df -h / | awk 'NR==2 {print $5}'`)
 
+    (defpoll gpu :interval "3s"
+      `nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader,nounits | awk '{print int($1)}'`)
+
+    (defpoll vram :interval "5s"
+      `nvidia-smi --query-gpu=memory.used,memory.total --format=csv,noheader,nounits | awk -F', ' '{printf "%dMB/%dMB", $1, $2}'`)
+
+
     (deflisten workspaces :initial "[]"
       `${pkgs.writeShellScript "get-workspaces" ''
         spaces() {
@@ -33,8 +40,16 @@
         done
       ''}`)
 
+    (deflisten active-window :initial ""
+      `${pkgs.writeShellScript "get-active-window" ''
+        ${pkgs.hyprland}/bin/hyprctl activewindow -j | ${pkgs.jq}/bin/jq -r '.title // ""'
+        ${pkgs.socat}/bin/socat -u UNIX-CONNECT:"$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock" - | while read -r line; do
+          ${pkgs.hyprland}/bin/hyprctl activewindow -j | ${pkgs.jq}/bin/jq -r '.title // ""'
+        done
+      ''}`)
+
     (defwidget workspaces []
-      (box :class "workspaces" :orientation "h" :spacing 8
+      (box :class "workspaces" :orientation "h" :spacing 8 :halign "start"
         (for ws in {workspaces.all}
           (button
             :class {ws == workspaces.active ? "ws-active" : "ws-inactive"}
@@ -42,21 +57,34 @@
             "''${ws}"))))
 
     (defwidget metrics []
-      (box :class "metrics" :orientation "h" :spacing 16
+      (box :class "metrics" :orientation "h" :spacing 16 :halign "end"
         (label :text "Cpu: ''${cpu}%")
         (label :text "|")
         (label :text "''${memory}")
+        (label :text "|")
+        (label :text "Gpu: ''${gpu}%")
+        (label :text "|")
+        (label :text "Vram: ''${vram}")
         (label :text "|")
         (label :text "Disk: ''${disk}")))
 
     (defwidget bar []
       (centerbox :orientation "h"
         (workspaces)
-        (label :class "time" :text time)
+        (box :orientation "h" :spacing 16 :halign "center"
+          (label :class "time" :text time)
+          (label :class "active-window" :text active-window :limit-width 40))
         (metrics)))
 
     (defwindow bar
       :monitor 0
+      :geometry (geometry :x "0%" :y "0%" :width "100%" :height "28px" :anchor "top center")
+      :stacking "fg"
+      :exclusive true
+      (bar))
+
+    (defwindow bar1
+      :monitor 1
       :geometry (geometry :x "0%" :y "0%" :width "100%" :height "28px" :anchor "top center")
       :stacking "fg"
       :exclusive true
@@ -91,6 +119,10 @@
 
     .time {
       font-weight: bold;
+    }
+
+    .active-window {
+      color: #aaaaaa;
     }
 
     .metrics {
