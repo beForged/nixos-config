@@ -11,6 +11,7 @@
     #./i3.nix
     #./picom.nix
     ./hyprland.nix
+    ./hypridle.nix
     ./eww.nix
   ];
 

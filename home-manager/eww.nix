@@ -11,6 +11,9 @@
     (defpoll time :interval "1s"
       `date '+%A %d %B at %H:%M'`)
 
+    (defpoll caffeine :interval "5s"
+      `systemctl --user is-active hypridle.service >/dev/null 2>&1 && echo "off" || echo "on"`)
+
     (defpoll cpu :interval "3s"
       `top -bn1 | grep "Cpu(s)" | awk '{print int($2)}'`)
 
@@ -46,22 +49,30 @@
       ''}`)
 
     (defwidget workspaces []
-      (box :class "workspaces" :orientation "h" :spacing 8 :halign "start" :width 100
+      (box :class "workspaces" :orientation "h" :spacing 8 :halign "start"
         (for ws in {workspaces.all}
           (button
             :class {ws == workspaces.active ? "ws-active" : "ws-inactive"}
             :onclick "hyprctl dispatch workspace ''${ws}"
             "''${ws}"))))
 
+    (defwidget caffeine-toggle []
+      (button
+        :class {caffeine == "on" ? "caffeine-active" : "caffeine-inactive"}
+        :onclick {caffeine == "on" ? "systemctl --user start hypridle.service" : "systemctl --user stop hypridle.service"}
+        {caffeine == "on" ? "Caf: on" : "Caf: off"}))
+
     (defwidget metrics []
-      (box :class "metrics" :orientation "h" :spacing 16 :halign "end"
+      (box :class "metrics" :orientation "h" :spacing 8 :halign "end"
         (label :text "Cpu: ''${cpu}%")
         (label :text "|")
         (label :text "''${memory}")
         (label :text "|")
         (label :text "Gpu: ''${gpu}%")
         (label :text "|")
-        (label :text "Disk: ''${disk}")))
+        (label :text "Disk: ''${disk}")
+        (label :text "|")
+        (caffeine-toggle)))
 
     (defwidget bar []
       (centerbox :orientation "h"
@@ -126,6 +137,14 @@
 
     .metrics {
       margin-right: 12px;
+    }
+
+    .caffeine-active {
+      color: #ffcc00;
+    }
+
+    .caffeine-inactive {
+      color: #888888;
     }
   '';
 }

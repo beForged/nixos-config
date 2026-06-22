@@ -146,8 +146,8 @@ in
     };
 
     extraConfig = ''
-      windowrule = opacity 0.85 0.75, match:class kitty
-      windowrule = opacity 1.0 1.0 1.0, match:class firefox
+      windowrule = opacity 0.85 override 0.75 override, match:class kitty
+      windowrule = opacity 1.0 override 1.0 override, match:class firefox
       windowrule = float 1, match:title Picture-in-Picture
     '';
   };
