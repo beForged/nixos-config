@@ -2,14 +2,7 @@
   programs.starship = {
     enable = true;
     settings = {
-      format = ''
-        $time\
-        $directory\
-        $git_branch\
-        $git_status\
-        $cmd_duration\
-        $line_break$character
-      '';
+      format = "$time$directory$git_branch$git_status$cmd_duration$line_break$character";
 
       add_newline = true;
 
