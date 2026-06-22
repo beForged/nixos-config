@@ -19,6 +19,14 @@
 
       grep = "grep --color=auto";
 
+      sourcerc = "exec zsh";
+
+      gs = "git status";
+      gd = "git diff";
+      gsw = "git switch";
+      gswm = "git switch main && git pull --ff";
+      gcam = "git commit -am";
+
       vi = "vim";
 
       edit = "vim";
@@ -38,8 +46,9 @@
     };
     initContent = ''
       export LV2_PATH=/home/scarlet/.lv2:/home/scarlet/.nix-profile/lib/lv2:/run/current-system/sw/lib/lv2
-      autoload -U colors && colors
-      PS1="%{$fg[red]%}%n%{$reset_color%}@%{$fg[blue]%}%m %{$fg[yellow]%}%~ %{$reset_color%}%% "
+
+      gcm() { git commit -am "$1" && git push; }
+      gcb() { git switch -c "$1"; }
 
        # ---- Hyprland autostart on TTY1 ----
       if [ -z "$DISPLAY" ] && [ -z "$WAYLAND_DISPLAY" ] && [ "$(tty)" = "/dev/tty1" ]; then

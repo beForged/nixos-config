@@ -5,6 +5,8 @@
 }: {
   imports = [
     ./zsh.nix
+    ./starship.nix
+    ./atuin.nix
     ./git.nix
     ./vim.nix
     ./kitty.nix
