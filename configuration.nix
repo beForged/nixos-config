@@ -155,8 +155,13 @@ in {
 
   #steam
   programs.steam.enable = true;
-  hardware.graphics.enable = true;
-  hardware.graphics.enable32Bit = true;
+  hardware = {
+    graphics.enable = true;
+    graphics.enable32Bit = true;
+  };
+
+
+
 
   # enable hyprland wayland
   programs.hyprland = {
@@ -191,7 +196,7 @@ in {
     modesetting.enable = true;
     powerManagement.enable = true;
 
-    open = true;
+    open = false;
   };
 
   services.libinput = {
