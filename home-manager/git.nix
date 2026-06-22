@@ -1,9 +1,9 @@
 {pkgs, ...}: {
   programs.git = {
     enable = true;
-    userName = "Richard Yu";
-    userEmail = "richardyu042@gmail.com";
-    extraConfig = {
+    settings = {
+      user.name = "Richard Yu";
+      user.email = "richardyu042@gmail.com";
       init.defaultBranch = "main";
       core.editor = "vim";
     };
