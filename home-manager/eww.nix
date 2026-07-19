@@ -49,7 +49,7 @@
       ''}`)
 
     (defwidget workspaces []
-      (box :class "workspaces" :orientation "h" :spacing 8 :halign "start"
+      (box :class "workspaces" :orientation "h" :spacing 4 :halign "start"
         (for ws in {workspaces.all}
           (button
             :class {ws == workspaces.active ? "ws-active" : "ws-inactive"}
@@ -63,7 +63,7 @@
         {caffeine == "on" ? "Caf: on" : "Caf: off"}))
 
     (defwidget metrics []
-      (box :class "metrics" :orientation "h" :spacing 8 :halign "end"
+      (box :class "metrics" :orientation "h" :spacing 4 :halign "end"
         (label :text "Cpu: ''${cpu}%")
         (label :text "|")
         (label :text "''${memory}")
@@ -76,7 +76,7 @@
 
     (defwidget bar []
       (centerbox :orientation "h"
-        (box :orientation "h" :spacing 16 :halign "start"
+        (box :orientation "h" :space-evenly false :spacing 16 :halign "start"
           (workspaces)
           (label :class "active-window" :text active-window :limit-width 40))
         (label :class "time" :text time)
