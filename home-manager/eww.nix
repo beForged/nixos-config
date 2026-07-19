@@ -69,9 +69,10 @@
         {caffeine == "on" ? "Caf: on" : "Caf: off"}))
 
     (defwidget music-widget []
-      (box :class "music" :space-evenly false
-        (label :text {playing-status == "Playing" ? "▶" : "⏸"})
-        (label :text " Now Playing: ''${now-playing}")))
+      (eventbox :onclick "playerctl -p firefox play-pause"
+        (box :class "music" :space-evenly false :spacing 4 :halign "end"
+          (label :text {playing-status == "Playing" ? "▶" : "⏸"})
+          (label :text " Now Playing: ''${now-playing}"))))
 
     (defwidget metrics []
       (box :class "metrics" :orientation "h" :spacing 8 :halign "end" :space-evenly false
@@ -150,6 +151,9 @@
 
     .metrics {
       margin-right: 12px;
+    }
+
+    .music {
     }
 
     .caffeine-active {
