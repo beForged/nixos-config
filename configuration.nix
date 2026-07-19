@@ -302,9 +302,7 @@ in {
     pulseaudio # needed for pactl
     pavucontrol
     ffmpeg
-
-    deepfilternet
-    ladspa-sdk
+    playerctl
 
     #jellyfin pkgs
     pkgs.jellyfin

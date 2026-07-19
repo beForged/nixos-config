@@ -26,6 +26,12 @@
     (defpoll gpu :interval "3s"
       `nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader,nounits | awk '{print int($1)}'`)
 
+    (defpoll now-playing :interval "1s"
+      `playerctl -p firefox metadata --format '{{artist}} - {{title}}'`) 
+      
+    (defpoll playing-status :interval "1s"
+      `playerctl -p firefox status`)
+
 
     (deflisten workspaces :initial "[]"
       `${pkgs.writeShellScript "get-workspaces" ''
@@ -62,8 +68,15 @@
         :onclick {caffeine == "on" ? "systemctl --user start hypridle.service" : "systemctl --user stop hypridle.service"}
         {caffeine == "on" ? "Caf: on" : "Caf: off"}))
 
+    (defwidget music-widget []
+      (box :class "music" :space-evenly false
+        (label :text {playing-status == "Playing" ? "▶" : "⏸"})
+        (label :text " Now Playing: ''${now-playing}")))
+
     (defwidget metrics []
-      (box :class "metrics" :orientation "h" :spacing 4 :halign "end"
+      (box :class "metrics" :orientation "h" :spacing 8 :halign "end" :space-evenly false
+        (music-widget)
+        (label :text "|")
         (label :text "Cpu: ''${cpu}%")
         (label :text "|")
         (label :text "''${memory}")
