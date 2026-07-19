@@ -1,9 +1,16 @@
 setup for home desktop nixos files
 
-wip on many parts (especially compositing and x setup)
+to switch between x11 and wayland, go to home.nix
+- comment out hyprland and hypridle and eww.nix
+- uncomment i3 and picom
+- comment out the cursor (maybe not needed)
+- comment out wayland packages like awww, wl clipboard, mako, xdg portal, polkit agent
+- comment out some of the session vars
 
-todo/ideas: add easy /x/ and /wayland/ folders so can easily swap between different compositors/servers
-- fix undodir on vim
-- add picom
-- add ranger / rifle.conf
-- setup xrandr / arandr auto monitor configuration
+new todo / nice to have list:
+- figure out how to use neovim as an ide with an lsp
+- figure out how to package vpn homepage without leaking api keys
+- add weather (update once per hour?) to topbar
+    - likely can use pirate weather or openweather api
+- fix window gaps spacing? 
+- update zsh aliases to use wayland instead of x commands (like wallpaper)
