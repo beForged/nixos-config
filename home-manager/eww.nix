@@ -70,9 +70,9 @@
 
     (defwidget music-widget []
       (eventbox :onclick "playerctl -p firefox play-pause"
-        (box :class "music" :space-evenly false :spacing 4 :halign "end"
+        (box :class "music" :space-evenly false :spacing 4 :halign "end" 
           (label :text {playing-status == "Playing" ? "▶" : "⏸"})
-          (label :text " Now Playing: ''${now-playing}"))))
+          (label :text " Now Playing: ''${now-playing}" :limit-width 40 ))))
 
     (defwidget metrics []
       (box :class "metrics" :orientation "h" :spacing 8 :halign "end" :space-evenly false
