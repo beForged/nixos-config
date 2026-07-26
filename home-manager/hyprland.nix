@@ -1,6 +1,4 @@
-{ pkgs, ... }:
-
-let
+{pkgs, ...}: let
   wallpaper-switcher = pkgs.writeShellScriptBin "wallpaper-switcher" ''
     WALLPAPER_DIR="$HOME/pictures"
     MONITORS=$(${pkgs.hyprland}/bin/hyprctl monitors -j | ${pkgs.jq}/bin/jq -r '.[].name')
@@ -15,9 +13,8 @@ let
       i=$((i+1))
     done
   '';
-in
-{
-  home.packages = [ wallpaper-switcher ];
+in {
+  home.packages = [wallpaper-switcher];
 
   wayland.windowManager.hyprland = {
     enable = true;

@@ -48,7 +48,6 @@
         error_symbol = "[✗](red)";
         vicmd_symbol = "[❮](yellow)";
       };
-
     };
   };
 }

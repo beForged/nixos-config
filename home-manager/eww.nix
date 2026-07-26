@@ -1,6 +1,4 @@
-{ pkgs, ... }:
-
-{
+{pkgs, ...}: {
   home.packages = with pkgs; [
     eww
     jq
@@ -27,32 +25,32 @@
       `nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader,nounits | awk '{print int($1)}'`)
 
     (defpoll now-playing :interval "1s"
-      `playerctl -p firefox metadata --format '{{artist}} - {{title}}'`) 
-      
+      `playerctl -p firefox metadata --format '{{artist}} - {{title}}'`)
+
     (defpoll playing-status :interval "1s"
       `playerctl -p firefox status`)
 
 
     (deflisten workspaces :initial "[]"
       `${pkgs.writeShellScript "get-workspaces" ''
-        spaces() {
-          SESSION=$(${pkgs.hyprland}/bin/hyprctl workspaces -j | ${pkgs.jq}/bin/jq -c '[.[] | .id] | sort')
-          ACTIVE=$(${pkgs.hyprland}/bin/hyprctl activeworkspace -j | ${pkgs.jq}/bin/jq '.id')
-          echo "{\"all\": $SESSION, \"active\": $ACTIVE}"
-        }
+      spaces() {
+        SESSION=$(${pkgs.hyprland}/bin/hyprctl workspaces -j | ${pkgs.jq}/bin/jq -c '[.[] | .id] | sort')
+        ACTIVE=$(${pkgs.hyprland}/bin/hyprctl activeworkspace -j | ${pkgs.jq}/bin/jq '.id')
+        echo "{\"all\": $SESSION, \"active\": $ACTIVE}"
+      }
+      spaces
+      ${pkgs.socat}/bin/socat -u UNIX-CONNECT:"$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock" - | while read -r line; do
         spaces
-        ${pkgs.socat}/bin/socat -u UNIX-CONNECT:"$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock" - | while read -r line; do
-          spaces
-        done
-      ''}`)
+      done
+    ''}`)
 
     (deflisten active-window :initial ""
       `${pkgs.writeShellScript "get-active-window" ''
+      ${pkgs.hyprland}/bin/hyprctl activewindow -j | ${pkgs.jq}/bin/jq -r '.title // ""'
+      ${pkgs.socat}/bin/socat -u UNIX-CONNECT:"$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock" - | while read -r line; do
         ${pkgs.hyprland}/bin/hyprctl activewindow -j | ${pkgs.jq}/bin/jq -r '.title // ""'
-        ${pkgs.socat}/bin/socat -u UNIX-CONNECT:"$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock" - | while read -r line; do
-          ${pkgs.hyprland}/bin/hyprctl activewindow -j | ${pkgs.jq}/bin/jq -r '.title // ""'
-        done
-      ''}`)
+      done
+    ''}`)
 
     (defwidget workspaces []
       (box :class "workspaces" :orientation "h" :spacing 4 :halign "start"
@@ -70,7 +68,7 @@
 
     (defwidget music-widget []
       (eventbox :onclick "playerctl -p firefox play-pause"
-        (box :class "music" :space-evenly false :spacing 4 :halign "end" 
+        (box :class "music" :space-evenly false :spacing 4 :halign "end"
           (label :text {playing-status == "Playing" ? "▶" : "⏸"})
           (label :text " Now Playing: ''${now-playing}" :limit-width 40 ))))
 

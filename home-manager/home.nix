@@ -40,8 +40,6 @@
     # ".config/picom.conf".source = ./files/picom.conf;
   };
 
-
-
   home.sessionVariables = {
     GTK_IM_MODULE = "fcitx";
     QT_IM_MODULE = "fcitx";

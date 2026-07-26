@@ -86,7 +86,6 @@ in {
     ];
   };
 
-
   #experimental features
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
@@ -161,9 +160,6 @@ in {
     graphics.enable = true;
     graphics.enable32Bit = true;
   };
-
-
-
 
   # enable hyprland wayland
   programs.hyprland = {
