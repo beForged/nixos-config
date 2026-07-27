@@ -51,7 +51,7 @@ in {
       };
 
       general = {
-        gaps_in = 15;
+        gaps_in = 12;
         gaps_out = 8;
 
         border_size = 0;
