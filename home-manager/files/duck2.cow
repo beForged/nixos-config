@@ -1,0 +1,56 @@
+$the_cow = <<EOC;
+    $thoughts
+     $thoughts
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%WMkkkk#WW&%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*m-` Ii111[iii: ![d%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Wf';[k8%BBBBBB%%%%B8X~ rm%%%%%%%%%%%%%%%%%%%%%%%%%%%%W
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%n `xb%%%BBBBBBBBBBBBBBBBo/`\W%%%%%%%%%%%%%%%%%%%%%Wt)\f`
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Wi~o%B%BBBBBBBBBBBBBBBBBBBB8*| +&%%%%%%%%%%%%%%%%%%X'0h]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%#! h%%%%BBBBBBBBBBBBBBBBBBBBB%%WI^%%%%%%%%%%%%%%om>~? kW&&q
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%z.w%%%BBBBBBBBBBBBBBBBBBBBBB%B%%8; U%%%%%%%%%%%('+du  "#&&&
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%{'d%BBBBBBBBBBBBBBBBBBBBBBB%d >q%@v!:*%%%%%%%%%C x&&&&' .XW
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%;'d%BBBBBBBBBBBBBBBBBBBBBBB%a>:0%%%o;^~d%%%%%%%%f.0&&&&b{^-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%;;%%BBBBBBBBBBBBBBBBBBBBBBBBB%%BBBBBBB/ 1&%%%%%%m! w&&&&&8%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%p^v%%%%BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB%M~!*%%%%%%W>.J&&&&&&
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%p^c%%%%BBB?[&BBBBBBBBBBBBBBBBBB%%BBBBBBBBWI'%%%%%%%%x n&&&&&
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%p^c%%%%B%r  {8%BBBBBBBBBBBBBBBBdLM&%%BBBBB! d%%%%%%%%v^'fW&&
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%p^c%%BBBBJ;;wB%BBBBBBBBBBBBBM0 `::`''..'+}" %%%%%%%%%%%m:'1*
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%p^cB%%%BBBBBBBBBBBBBBBBBM&;  ,Xkkkkkkkkha!^ co%%%%%%%%%%%*/
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%p^lB%%%BBBBBBBBBBBBBBBBI'+0qdkkkkkkkkkkkhkka[ x%%%%%%%%%%%%Z
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%;;B%BBBBBBBBBBBBBBBB%r hkkkhhhhhkkkkkkkkhkkh'>%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%X'd%BBBBBBBBBBBBBBBB8! kkkkhhhhhkkkkkkkkhkkkr b%%%%%%%%%%o+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%0 ZBBBBBBBBBBBBBBBBBBn mkkkhhhhhkkkkkkkkhkk0 ]%%%%%%%%%%t >
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%m`X%BBBBBBBBBBBBBBBBBh+  ZkhkhhhkkkkkkkkdQ, >%%%%%%%%%%*.l&
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%>'%BBBBBBBBBBBBBBBBB%%&l  >{fLkkkkbf/[! .  W%%%%%%%%%%*'1&
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%>'%BBBBBBBBBBBBBBBBBBBB%B%0c,     :iLq#%%B,,Y%%%%%%%%%%{ ?
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%>'%BBBBBBBBBBBBBBBBBBBBBBBBB%%%%%%%%%BBBBB8v ,M%%%%%%%%%%*
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%>.%BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB%%%d ]Z%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Q OBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB%%Bt`|8%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%L ZBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB%m u%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%{'d%BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB*..k%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%;:WBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB%U.J%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%C`u%BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB%Q.<&%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%h ;nB%%B%BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB?^b%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%p~ z%B%B%%BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB%J !%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Wa~":ZMBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB%J i%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Wm>' U#B%BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBC 0%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%df;']Z@B%%%%%BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB%t w%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%qr. `wq%%%%%BB%%%BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB%-Io%%%%%%%
+%%%%%%%%%%%%%%%%%%%b-^^<w#%%%%BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBO'+%%%%%%%%
+%%%%%%%%%%%%%%%Wd>l'zMBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBx.x%%%%%%%%
+%%%%%%%%%%%%%%% [0*%B%BBBBBBBBB%BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB%Bd f8%%%%%%%%
+%%%%%%%%%%%%%%%B%%BB%BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB%dI M%%%%%%%%%
+%%%%%%%%%%%%%%%BB%BBBBBBB&Yf.. '.,8BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB*;[8%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%B%%%@,  {0&%%%%%%BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB%BZ ro%%%%%%%%%%%
+%%%%%%%%%%%%%%%BBBBB*;,(o8BBBB%BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBO (&%%%%%%%%%%%%
+%%%%%%%%%%%%%%%BBB%%[,*%BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBd".f%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%BBBBq ,M%BBBBBBBBBBBBBB%%B%%BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB%Z^.%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%BB%B%t'[WBBBBBBBBBBBBBBBBh(O%BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBM<`_%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%BBBBB%8u'b&BBBBBBBBBBBBB%p^c%BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBk "o%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%BBBBBBB%p?' ;m%BBBBBBBB&0lIw%BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB%M::Q%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%BBBBBBBB%%%oQl. .'''''  `\%B%%BBBBBBBBBBBBBBBBBBBBBBBBB%BBBBW :p%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%BBBBBBBBBBBBB%B%B&kkkko%%%BBBBBBBBBBBBBBBBBBBBBBBBBBBBBB%8dl;r%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB%B%8z: k8%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB%h]'-J&%%%%%%%%%%%%%%%%%%%%%%%%%%
+EOC
