@@ -206,6 +206,12 @@ in {
     mouse.accelProfile = "flat";
   };
 
+  services.debounce-mouse = {
+    enable = true;
+    device = "/dev/input/by-id/usb-BenQ_ZOWIE_BenQ_ZOWIE_Gaming_Mouse-event-mouse"; # find with: ls /dev/input/by-id/*mouse*
+    debounce = 100;
+  };
+
   #disenable sleep and stuff
   systemd.targets = {
     sleep.enable = false;
