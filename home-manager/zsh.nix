@@ -53,9 +53,9 @@
 
       if [[ $- == *i* ]]; then
         if (( RANDOM % 2 )); then
-          fortune -s 5% computers 5% linuxcookie 2% startrek 88% wisdom | cowsay -f ~/.dotfiles/apps/goose.cow | lolcat -S 6
+          fortune -s | cowsay -f ~/.config/cowsay/goose.cow | lolcat -S 6
         else
-          fortune -s 5% computers 5% linuxcookie 2% startrek 88% wisdom | cowsay -f ~/.dotfiles/apps/duck2.cow | lolcat -S 6
+          fortune -s | cowsay -f ~/.config/cowsay/duck2.cow | lolcat -S 6
         fi
       fi
 

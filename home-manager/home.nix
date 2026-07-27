@@ -38,6 +38,8 @@
   home.file = {
     # ".xinitrc".source = ./files/.xinitrc;
     # ".config/picom.conf".source = ./files/picom.conf;
+    ".config/cowsay/goose.cow".source = ./files/goose.cow;
+    ".config/cowsay/duck2.cow".source = ./files/duck2.cow;
   };
 
   home.sessionVariables = {
