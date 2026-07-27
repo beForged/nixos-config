@@ -1,5 +1,25 @@
 {
   "nodes": {
+    "debounce-mouse": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1785175314,
+        "narHash": "sha256-r3NLRvjy+ziJN8lobKvEiO5pogLQH9/DbV1YV6TkTNk=",
+        "ref": "refs/heads/main",
+        "rev": "37d1930b40fc5d470a57986a85c398fe7df4a2cb",
+        "revCount": 2,
+        "type": "git",
+        "url": "ssh://git@github.com/beForged/debounce-mouse.git"
+      },
+      "original": {
+        "type": "git",
+        "url": "ssh://git@github.com/beForged/debounce-mouse.git"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -38,6 +58,7 @@
     },
     "root": {
       "inputs": {
+        "debounce-mouse": "debounce-mouse",
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs"
       }
