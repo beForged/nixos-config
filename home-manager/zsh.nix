@@ -43,6 +43,7 @@
       restartpipewire = "systemctl --user restart wireplumber pipewire pipewire-pulse";
 
       rebuild = "sudo nixos-rebuild switch --impure  --flake '/home/scarlet/nixos#scarlet'";
+      rebuild-gw = "nixos-rebuild switch --flake '/home/scarlet/nixos#gateway' --target-host root@gateway --build-host localhost";
     };
     initContent = ''
       export LV2_PATH=/home/scarlet/.lv2:/home/scarlet/.nix-profile/lib/lv2:/run/current-system/sw/lib/lv2

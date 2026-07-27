@@ -325,7 +325,7 @@ in {
   fileSystems."/mnt" = {
     device = "UUID=2618B8A018B87083";
     fsType = "ntfs";
-    options = ["defaults"];
+    options = ["defaults" "uid=1000" "gid=100" "dmask=022" "fmask=133"];
   };
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

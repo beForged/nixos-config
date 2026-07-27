@@ -1,0 +1,64 @@
+{
+  config,
+  pkgs,
+  ...
+}: {
+  imports = [
+    ./hardware-configuration.nix
+    ./plex-gateway.nix
+  ];
+
+  nixpkgs.config.allowUnfree = true;
+
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+
+  time.timeZone = "America/New_York";
+
+  networking.useDHCP = true;
+
+  nix.settings.experimental-features = ["nix-command" "flakes"];
+
+  users.users.scarlet = {
+    isNormalUser = true;
+    home = "/home/scarlet";
+    extraGroups = ["wheel"];
+    shell = pkgs.zsh;
+    openssh.authorizedKeys.keys = [
+      # add your SSH public key here
+    ];
+  };
+
+  programs.zsh.enable = true;
+
+  security.sudo.wheelNeedsPassword = false;
+
+  services.tailscale.enable = true;
+
+  services.openssh = {
+    enable = true;
+    settings = {
+      PasswordAuthentication = false;
+      PermitRootLogin = "prohibit-password";
+    };
+  };
+
+
+  networking.firewall = {
+    enable = true;
+    # Plex public access
+    allowedTCPPorts = [80 443 32400];
+    # Tailscale-only ports (traefik dashboard, SSH)
+    interfaces.tailscale0.allowedTCPPorts = [8080 22];
+  };
+
+  environment.systemPackages = with pkgs; [
+    vim
+    git
+    wget
+    tailscale
+    htop
+  ];
+
+  system.stateVersion = "24.05";
+}
