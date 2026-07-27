@@ -33,12 +33,7 @@
 
       ping = "ping -c 5";
 
-      vgaright = "xrandr --output DP-1 --auto --right-of eDP-1";
-      vgaleft = "xrandr --output DP-1 --auto --left-of eDP-1";
-      hdmileft = "xrandr --output DP-2 --auto --left-of eDP-1";
-      hdmiright = "xrandr --output DP-2 --auto --right-of eDP-1";
-
-      wallpaper = "feh --bg-fill --randomize ~/pictures/*";
+      wallpaper = "wallpaper-switcher";
 
       restartpipewire = "systemctl --user restart wireplumber pipewire pipewire-pulse";
 

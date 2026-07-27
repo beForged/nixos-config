@@ -13,7 +13,6 @@ new todo / nice to have list:
 - add weather (update once per hour?) to topbar
     - likely can use pirate weather or openweather api
 - fix window gaps spacing? 
-- update zsh aliases to use wayland instead of x commands (like wallpaper)
 - implement
 `
 if status is-interactive
