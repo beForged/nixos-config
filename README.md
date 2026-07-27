@@ -11,9 +11,3 @@ new todo / nice to have list:
 - figure out how to use neovim as an ide with an lsp
 - figure out how to package vpn homepage without leaking api keys
 - fix window gaps spacing? 
-- implement
-`
-if status is-interactive
-    fortune 5% computers 5% linuxcookie 2% startrek 88% wisdom | cowsay -f ~/.dotfiles/apps/goose.cow | lolcat -S 6
-end
-`

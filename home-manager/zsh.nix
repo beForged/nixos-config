@@ -1,4 +1,10 @@
 {pkgs, ...}: {
+  home.packages = with pkgs; [
+    fortune
+    cowsay
+    lolcat
+  ];
+
   programs.zsh = {
     enable = true;
     syntaxHighlighting.enable = true;
@@ -44,6 +50,10 @@
 
       gcm() { git commit -am "$1" && git push; }
       gcb() { git switch -c "$1"; }
+
+      if [[ $- == *i* ]]; then
+        fortune -s 5% computers 5% linuxcookie 2% startrek 88% wisdom | cowsay -f ~/.dotfiles/apps/goose.cow | lolcat -S 6
+      fi
 
        # ---- Hyprland autostart on TTY1 ----
       if [ -z "$DISPLAY" ] && [ -z "$WAYLAND_DISPLAY" ] && [ "$(tty)" = "/dev/tty1" ]; then
