@@ -3,11 +3,36 @@
     eww
     jq
     socat
+    curl
   ];
 
   xdg.configFile."eww/eww.yuck".text = ''
     (defpoll time :interval "1s"
       `date '+%A %d %B at %H:%M'`)
+
+    (defpoll weather :interval "3600s"
+      `${pkgs.writeShellScript "get-weather" ''
+      DATA=$(${pkgs.curl}/bin/curl -sf "https://api.open-meteo.com/v1/forecast?latitude=40.71&longitude=-74.01&current=temperature_2m,weather_code&temperature_unit=celsius")
+      if [ -n "$DATA" ]; then
+        TEMP=$(echo "$DATA" | ${pkgs.jq}/bin/jq -r '.current.temperature_2m | round')
+        CODE=$(echo "$DATA" | ${pkgs.jq}/bin/jq -r '.current.weather_code')
+        case $CODE in
+          0) DESC="Clear" ;;
+          1|2|3) DESC="Cloudy" ;;
+          45|48) DESC="Fog" ;;
+          51|53|55|56|57) DESC="Drizzle" ;;
+          61|63|65|66|67) DESC="Rain" ;;
+          71|73|75|77) DESC="Snow" ;;
+          80|81|82) DESC="Showers" ;;
+          85|86) DESC="Snow" ;;
+          95|96|99) DESC="Storm" ;;
+          *) DESC="" ;;
+        esac
+        echo "''${TEMP}°C $DESC"
+      else
+        echo ""
+      fi
+    ''}`)
 
     (defpoll caffeine :interval "5s"
       `systemctl --user is-active hypridle.service >/dev/null 2>&1 && echo "off" || echo "on"`)
@@ -91,7 +116,9 @@
         (box :orientation "h" :space-evenly false :spacing 16 :halign "start"
           (workspaces)
           (label :class "active-window" :text active-window :limit-width 40))
-        (label :class "time" :text time)
+        (box :orientation "h" :space-evenly false :spacing 8 :halign "center"
+          (label :class "time" :text time)
+          (label :class "weather" :text weather))
         (metrics)))
 
     (defwindow bar
@@ -141,6 +168,10 @@
 
     .time {
       font-weight: bold;
+    }
+
+    .weather {
+      color: #aaaaaa;
     }
 
     .active-window {

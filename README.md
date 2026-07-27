@@ -10,8 +10,6 @@ to switch between x11 and wayland, go to home.nix
 new todo / nice to have list:
 - figure out how to use neovim as an ide with an lsp
 - figure out how to package vpn homepage without leaking api keys
-- add weather (update once per hour?) to topbar
-    - likely can use pirate weather or openweather api
 - fix window gaps spacing? 
 - implement
 `
