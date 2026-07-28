@@ -23,6 +23,7 @@
   networking.useDHCP = true;
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
+  nix.settings.trusted-users = ["root" "scarlet"];
 
   users.users.scarlet = {
     isNormalUser = true;
