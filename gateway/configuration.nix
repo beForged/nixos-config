@@ -30,7 +30,7 @@
     extraGroups = ["wheel"];
     shell = pkgs.zsh;
     openssh.authorizedKeys.keys = [
-      # add your SSH public key here
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINsvUGQ/UAYG9RkeGzN1t7c3EHzuIy3so85fe+iQDB8Z oci"
     ];
   };
 
