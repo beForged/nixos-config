@@ -63,6 +63,7 @@
     wget
     tailscale
     htop
+    kitty.terminfo
   ];
 
   system.stateVersion = "24.05";
