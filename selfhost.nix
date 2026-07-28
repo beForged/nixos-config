@@ -65,6 +65,20 @@
 
   # --------------------------
 
+  # plex - accessible via tailscale and OCI gateway
+  services.plex = {
+    enable = true;
+    user = "scarlet";
+    group = "users";
+    openFirewall = false;
+    dataDir = "/var/lib/plex";
+  };
+
+  # allow plex on tailscale interface only (OCI gateway connects over tailscale)
+  networking.firewall.interfaces.tailscale0.allowedTCPPorts = [32400];
+
+  # --------------------------
+
   services.deluge = {
     enable = true;
     web.enable = true;
@@ -116,6 +130,10 @@
       api = {
         dashboard = true;
         insecure = true;
+      };
+
+      metrics.prometheus = {
+        entryPoint = "traefik";
       };
 
       log = {
