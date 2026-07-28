@@ -54,8 +54,8 @@
     enable = true;
     # Plex public access
     allowedTCPPorts = [80 443 32400];
-    # Tailscale-only ports (traefik dashboard, SSH)
-    interfaces.tailscale0.allowedTCPPorts = [8080 22];
+    # Tailscale-only ports (SSH)
+    interfaces.tailscale0.allowedTCPPorts = [22];
   };
 
   environment.systemPackages = with pkgs; [
@@ -65,6 +65,7 @@
     tailscale
     htop
     kitty.terminfo
+    tcpdump
   ];
 
   system.stateVersion = "24.05";

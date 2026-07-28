@@ -3,63 +3,28 @@
   pkgs,
   ...
 }: {
-  services.traefik = {
+  services.nginx = {
     enable = true;
 
-    staticConfigOptions = {
-      entryPoints = {
-        web = {
-          address = ":80";
-          asDefault = true;
-        };
-        plex = {
-          address = ":32400";
-        };
-        traefik = {
-          address = ":8080";
-        };
-      };
+    recommendedProxySettings = true;
+    recommendedOptimisation = true;
 
-      api = {
-        dashboard = true;
-        insecure = true;
-      };
+    virtualHosts."plex" = {
+      listen = [
+        { addr = "0.0.0.0"; port = 80; }
+        { addr = "0.0.0.0"; port = 32400; }
+      ];
 
-      metrics.prometheus = {
-        entryPoint = "traefik";
-      };
-
-      log = {
-        level = "INFO";
-        filePath = "${config.services.traefik.dataDir}/traefik.log";
-        format = "json";
-      };
-    };
-
-    dynamicConfigOptions = {
-      http = {
-        routers = {
-          plex = {
-            rule = "Host(`gateway.tail097e5.ts.net`) || PathPrefix(`/`)";
-            entryPoints = ["plex" "web"];
-            service = "plex-backend";
-          };
-        };
-        services = {
-          plex-backend = {
-            loadBalancer.servers = [
-              {
-                url = "http://100.111.74.101:32400";
-              }
-            ];
-            loadBalancer.responseForwarding.flushInterval = "100ms";
-            loadBalancer.healthCheck = {
-              path = "/identity";
-              interval = "30s";
-              timeout = "5s";
-            };
-          };
-        };
+      locations."/" = {
+        proxyPass = "http://100.111.74.101:32400";
+        proxyWebsockets = true;
+        extraConfig = ''
+          proxy_buffering off;
+          proxy_request_buffering off;
+          proxy_http_version 1.1;
+          proxy_read_timeout 86400s;
+          proxy_send_timeout 86400s;
+        '';
       };
     };
   };
