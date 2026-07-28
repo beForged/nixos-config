@@ -1,20 +1,21 @@
 {
   config,
   pkgs,
-  modulesPath,
   ...
 }: {
   imports = [
+    ./hardware-configuration.nix
     ./plex-gateway.nix
-    (modulesPath + "/profiles/qemu-guest.nix")
   ];
 
   nixpkgs.config.allowUnfree = true;
 
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-
-  boot.initrd.availableKernelModules = ["xhci_pci" "virtio_scsi" "virtio_pci"];
+  boot.loader.grub = {
+    enable = true;
+    efiSupport = true;
+    efiInstallAsRemovable = true;
+    device = "nodev";
+  };
 
   time.timeZone = "America/New_York";
 
