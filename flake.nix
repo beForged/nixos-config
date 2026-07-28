@@ -7,12 +7,16 @@
 
     debounce-mouse.url = "git+ssh://git@github.com/beForged/debounce-mouse.git";
     debounce-mouse.inputs.nixpkgs.follows = "nixpkgs";
+
+    disko.url = "github:nix-community/disko";
+    disko.inputs.nixpkgs.follows = "nixpkgs";
   };
   outputs = {
     self,
     nixpkgs,
     home-manager,
     debounce-mouse,
+    disko,
   }: {
     nixosConfigurations.scarlet = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
@@ -39,6 +43,8 @@
       system = "x86_64-linux";
 
       modules = [
+        disko.nixosModules.disko
+        ./gateway/disko.nix
         ./gateway/configuration.nix
       ];
     };
