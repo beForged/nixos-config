@@ -49,11 +49,10 @@
           plex-backend = {
             loadBalancer.servers = [
               {
-                # your home machine's Tailscale IP (scarlet)
-                # update this to match: tailscale ip -4 (on your home machine)
                 url = "http://100.111.74.101:32400";
               }
             ];
+            loadBalancer.responseForwarding.flushInterval = "100ms";
             loadBalancer.healthCheck = {
               path = "/identity";
               interval = "30s";
