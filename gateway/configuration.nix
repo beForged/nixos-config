@@ -10,6 +10,7 @@
 
   nixpkgs.config.allowUnfree = true;
 
+  boot.loader.efi.efiSysMountPoint = "/boot/efi";
   boot.loader.grub = {
     enable = true;
     efiSupport = true;
