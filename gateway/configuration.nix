@@ -53,7 +53,7 @@
   networking.firewall = {
     enable = true;
     # Plex public access
-    allowedTCPPorts = [80 443 32400];
+    allowedTCPPorts = [80 443];
     # Tailscale-only ports (SSH)
     interfaces.tailscale0.allowedTCPPorts = [22];
   };
