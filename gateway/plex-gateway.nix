@@ -21,7 +21,6 @@
         extraConfig = ''
           proxy_buffering off;
           proxy_request_buffering off;
-          proxy_http_version 1.1;
           proxy_read_timeout 86400s;
           proxy_send_timeout 86400s;
         '';
