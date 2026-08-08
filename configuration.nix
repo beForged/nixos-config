@@ -1,4 +1,4 @@
-# Edet this configuration file to define what should be installed on
+# Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 {
@@ -71,12 +71,17 @@ in {
   #   keyMap = "us";
   # };
 
+  # automatic gc of old and unused nix packages
+  nix.gc.automatic = true;
+
   security.sudo.extraConfig = ''
     %wheel  ALL=NOPASSWD: /run/current-system/sw/bin/shutdown
   '';
 
   # user configuration - set password with passwd
-  users.extraUsers.scarlet = {
+  # default shell specification
+  users.users.scarlet = {
+    shell = pkgs.zsh;
     isNormalUser = true;
     home = "/home/scarlet";
     extraGroups = [
@@ -88,11 +93,6 @@ in {
 
   #experimental features
   nix.settings.experimental-features = ["nix-command" "flakes"];
-
-  # allowed for r2modman (lethal company) 14/12/2023
-  nixpkgs.config.permittedInsecurePackages = [
-    "electron-25.9.0"
-  ];
 
   # user packages
   users.users.scarlet.packages = with pkgs; [
@@ -139,17 +139,10 @@ in {
 
     circumflex
 
-    actual-server
-
     (llama-cpp.override {
       cudaSupport = true;
     })
   ];
-
-  # default shell specification
-  users.users.scarlet = {
-    shell = pkgs.zsh;
-  };
 
   # shell
   programs.zsh.enable = true;
@@ -165,15 +158,6 @@ in {
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;
-  };
-
-  environment.sessionVariables = {
-    NIXOS_OZONE_WL = "1";
-    MOZ_ENABLE_WAYLAND = "1";
-    MOZ_DISABLE_RDD_SANDBOX = "1";
-    LIBVA_DRIVER_NAME = "nvidia";
-    CUDA_DISABLE_PERF_BOOST = "1";
-    NVD_BACKEND = "direct";
   };
 
   # Enable the X11 windowing system.
@@ -341,16 +325,19 @@ in {
   services.openssh = {
     enable = true;
     ports = [22 2222];
-    listenAddresses = [
-      {
-        addr = "127.0.0.1";
-        port = 2222;
-      }
-      {
-        addr = "100.111.74.101";
-        port = 2222;
-      }
-    ];
+    settings = {
+      PasswordAuthentication = false;
+    };
+    #  listenAddresses = [
+    #    {
+    #      addr = "127.0.0.1";
+    #      port = 2222;
+    #    }
+    #    {
+    #      addr = "100.111.74.101";
+    #      port = 2222;
+    #    }
+    #  ];
   };
 
   # Enable the OpenSSH server
@@ -360,7 +347,7 @@ in {
   networking.firewall = {
     # for input leap
     allowedTCPPorts = [24800];
-    interfaces.tailscale0.allowedTCPPorts = [2222];
+    interfaces.tailscale0.allowedTCPPorts = [2222 32400];
     # networking.firewall.allowedUDPPorts = [ ... ];
   };
   # Or disable the firewall altogether.

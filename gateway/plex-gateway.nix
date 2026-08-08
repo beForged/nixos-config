@@ -11,7 +11,14 @@
 
     virtualHosts."plex" = {
       listen = [
-        { addr = "0.0.0.0"; port = 80; }
+        {
+          addr = "0.0.0.0";
+          port = 80;
+        }
+        {
+          addr = "0.0.0.0";
+          port = 32400;
+        }
       ];
 
       locations."/" = {

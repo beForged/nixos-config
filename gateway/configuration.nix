@@ -49,7 +49,6 @@
     };
   };
 
-
   networking.firewall = {
     enable = true;
     # Plex public access

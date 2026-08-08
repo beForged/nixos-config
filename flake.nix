@@ -7,7 +7,6 @@
 
     debounce-mouse.url = "git+ssh://git@github.com/beForged/debounce-mouse.git";
     debounce-mouse.inputs.nixpkgs.follows = "nixpkgs";
-
   };
   outputs = {
     self,

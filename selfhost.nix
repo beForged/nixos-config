@@ -75,7 +75,8 @@
   };
 
   # allow plex on tailscale interface only (OCI gateway connects over tailscale)
-  networking.firewall.interfaces.tailscale0.allowedTCPPorts = [32400];
+  # moved to consolidate on config.nix
+  # networking.firewall.interfaces.tailscale0.allowedTCPPorts = [32400];
 
   # --------------------------
 
