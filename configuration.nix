@@ -20,7 +20,7 @@ in {
 
   imports = [
     # Include the results of the hardware scan.
-    /etc/nixos/hardware-configuration.nix
+    ./hardware-configuration.nix
     ./selfhost.nix
   ];
 
@@ -188,8 +188,11 @@ in {
 
   services.debounce-mouse = {
     enable = true;
-    device = "/dev/input/by-id/usb-BenQ_ZOWIE_BenQ_ZOWIE_Gaming_Mouse-event-mouse"; # find with: ls /dev/input/by-id/*mouse*
+    # find with: grep HID_NAME /sys/bus/hid/devices/*/uevent
+
+    device = "ZOWIE";
     debounce = 100;
+    # rdescSize = 52;
   };
 
   #disenable sleep and stuff

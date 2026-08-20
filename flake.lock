@@ -7,11 +7,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1785175314,
-        "narHash": "sha256-r3NLRvjy+ziJN8lobKvEiO5pogLQH9/DbV1YV6TkTNk=",
+        "lastModified": 1787198799,
+        "narHash": "sha256-xAJvB2oZsOGnKK/bvfGOkfl9F1pPie3YCq5+ss+aOGY=",
         "ref": "refs/heads/main",
-        "rev": "37d1930b40fc5d470a57986a85c398fe7df4a2cb",
-        "revCount": 2,
+        "rev": "153a0fe6b9ba1325ad953fd5a1e14d99f8a5d436",
+        "revCount": 17,
         "type": "git",
         "url": "ssh://git@github.com/beForged/debounce-mouse.git"
       },

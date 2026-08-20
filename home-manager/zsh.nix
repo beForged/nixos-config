@@ -43,7 +43,7 @@
 
       restartpipewire = "systemctl --user restart wireplumber pipewire pipewire-pulse";
 
-      rebuild = "sudo nixos-rebuild switch --flake '/home/scarlet/nixos#scarlet'";
+      rebuild = "nixos-rebuild switch --flake '/home/scarlet/nixos#scarlet' --sudo";
       rebuild-gw = "nixos-rebuild switch --flake '/home/scarlet/nixos#gateway' --target-host scarlet@gwvnic --sudo";
     };
     initContent = ''
