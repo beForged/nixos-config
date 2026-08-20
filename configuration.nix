@@ -271,7 +271,6 @@ in {
     racket
     go
     gopls
-    jetbrains.idea-oss
     jdk11
     python3
     flyctl
