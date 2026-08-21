@@ -93,7 +93,7 @@ in {
         "$mainMod,F,fullscreen"
         "$mainMod,SPACE,togglefloating"
         "$mainMod,P,pin"
-        "$mainMod,G,togglesplit"
+        "$mainMod,G,layoutmsg,togglesplit"
 
         "$mainMod,comma,movewindow,mon:-1"
         "$mainMod,period,movewindow,mon:+1"

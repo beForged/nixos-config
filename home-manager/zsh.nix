@@ -45,6 +45,7 @@
 
       rebuild = "nixos-rebuild switch --flake '/home/scarlet/nixos#scarlet' --sudo";
       rebuild-gw = "nixos-rebuild switch --flake '/home/scarlet/nixos#gateway' --target-host scarlet@gwvnic --sudo";
+      awaken = "hyprctl dispatch dpms on";
     };
     initContent = ''
       export LV2_PATH=/home/scarlet/.lv2:/home/scarlet/.nix-profile/lib/lv2:/run/current-system/sw/lib/lv2
