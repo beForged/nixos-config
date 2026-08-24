@@ -147,6 +147,20 @@ in {
   # shell
   programs.zsh.enable = true;
 
+  services.hister = {
+    enable = true;
+    settings = {
+      app = {
+        search_url = "https://google.com/search?q={query}";
+        log_level = "info";
+      };
+      server = {
+        address = "127.0.0.1:4433";
+        database = "db.sqlite3";
+      };
+    };
+  };
+
   #steam
   programs.steam.enable = true;
   hardware = {
@@ -249,7 +263,12 @@ in {
     fuse
     xdg-utils
     home-manager
+    ripgrep
+    ugrep
+
+    # nix
     alejandra # linter
+    nh
 
     # internet
     wget
@@ -260,7 +279,6 @@ in {
     # graphics
     mesa-demos
     nvidia-vaapi-driver
-    # feh
 
     ############
     #dev tools #
@@ -296,9 +314,6 @@ in {
     pkgs.jellyfin
     pkgs.jellyfin-web
     pkgs.jellyfin-ffmpeg
-
-    #kvm
-    input-leap
 
     #font
     noto-fonts-cjk-sans
