@@ -79,9 +79,6 @@ in {
   #   keyMap = "us";
   # };
 
-  # automatic gc of old and unused nix packages
-  nix.gc.automatic = true;
-
   security.sudo.extraConfig = ''
     %wheel  ALL=NOPASSWD: /run/current-system/sw/bin/shutdown
   '';
