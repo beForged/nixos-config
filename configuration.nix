@@ -38,8 +38,16 @@ in {
   # use default lts, latest kernel may cause issues w nvidia (add _latest for latest kernel)
   boot.kernelPackages = pkgs.linuxPackages;
 
-  # networking.hostName = "nixos"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  # disk space optimization
+  boot.loader.systemd-boot.configurationLimit = 15;
+
+  nix.gc = {
+    automatic = true;
+    dates = "monthly";
+    options = "--delete-older-than 30d";
+  };
+
+  nix.settings.auto-optimise-store = true;
 
   # Set your time zone.
   time.timeZone = "America/New_York";
