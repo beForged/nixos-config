@@ -128,6 +128,9 @@ in {
     # sox
     audacity
 
+    rsync
+    kdePackages.kdenlive
+
     # pdfslicer
     zathura
 
