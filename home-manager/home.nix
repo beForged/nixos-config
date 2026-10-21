@@ -32,7 +32,6 @@
     slurp
     wl-clipboard
     mako
-    xdg-desktop-portal-hyprland
     kdePackages.polkit-kde-agent-1
     libnotify
   ];

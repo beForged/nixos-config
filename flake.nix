@@ -2,6 +2,10 @@
   description = "nixos system configuration";
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    # used for packages built from source (cuda), see overlays/pinned.nix.
+    # use the `flakeup` alias for routine updates, it skips this input.
+    # `flakeup-pinned` bumps this pinned input (long rebuild possible)
+    nixpkgs-pinned.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -11,6 +15,7 @@
   outputs = {
     self,
     nixpkgs,
+    nixpkgs-pinned,
     home-manager,
     debounce-mouse,
   }: {
@@ -23,6 +28,7 @@
 
       modules = [
         ./configuration.nix
+        {nixpkgs.overlays = [(import ./overlays/pinned.nix {inherit nixpkgs-pinned;})];}
         debounce-mouse.nixosModules.default
 
         home-manager.nixosModules.home-manager

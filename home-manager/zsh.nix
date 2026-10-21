@@ -45,6 +45,9 @@
 
       rebuild = "nixos-rebuild switch --flake '/home/scarlet/nixos#scarlet' --sudo";
       rebuild-gw = "nixos-rebuild switch --flake '/home/scarlet/nixos#gateway' --target-host scarlet@gwvnic --sudo";
+      # update flake inputs except nixpkgs-pinned (slow cuda builds)
+      flakeup = "nix flake update --flake /home/scarlet/nixos nixpkgs home-manager debounce-mouse";
+      flakeup-pinned = "nix flake update --flake /home/scarlet/nixos nixpkgs-pinned";
       awaken = "hyprctl dispatch dpms on";
     };
     initContent = ''

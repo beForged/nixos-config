@@ -22,7 +22,15 @@
 
   networking.useDHCP = true;
 
+  boot.loader.grub.configurationLimit = 10;
+
   nix.settings.experimental-features = ["nix-command" "flakes"];
+  nix.settings.auto-optimise-store = true;
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 14d";
+  };
   nix.settings.trusted-users = ["root" "scarlet"];
 
   users.users.scarlet = {
@@ -43,16 +51,19 @@
 
   services.openssh = {
     enable = true;
+    # defaults to true, which opens 22 on every interface (incl. public).
+    # ssh is only allowed over tailscale, see firewall below.
+    openFirewall = false;
     settings = {
       PasswordAuthentication = false;
-      PermitRootLogin = "prohibit-password";
+      PermitRootLogin = "no";
     };
   };
 
   networking.firewall = {
     enable = true;
     # Plex public access
-    allowedTCPPorts = [80 443 32400];
+    allowedTCPPorts = [32400];
     # Tailscale-only ports (SSH)
     interfaces.tailscale0.allowedTCPPorts = [22];
   };

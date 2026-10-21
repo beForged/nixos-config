@@ -18,6 +18,9 @@ in {
 
   wayland.windowManager.hyprland = {
     enable = true;
+    # use the hyprland + portal installed by programs.hyprland in configuration.nix
+    package = null;
+    portalPackage = null;
     configType = "hyprlang";
 
     settings = {

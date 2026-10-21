@@ -60,7 +60,6 @@
   # enable jellyfin
   services.jellyfin = {
     enable = true;
-    user = "scarlet";
   };
 
   # --------------------------
@@ -68,8 +67,6 @@
   # plex - accessible via tailscale and OCI gateway
   services.plex = {
     enable = true;
-    user = "scarlet";
-    group = "users";
     openFirewall = false;
     dataDir = "/var/lib/plex";
   };
@@ -124,7 +121,8 @@
           asDefault = true;
         };
         traefik = {
-          address = ":8080"; # Enable dashboard endpoint
+          # dashboard endpoint, insecure api so keep it on localhost
+          address = "127.0.0.1:8080";
         };
       };
 

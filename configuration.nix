@@ -99,6 +99,10 @@ in {
   #experimental features
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
+  # prebuilt cuda packages, see overlays/pinned.nix
+  nix.settings.substituters = ["https://cache.nixos-cuda.org"];
+  nix.settings.trusted-public-keys = ["cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M="];
+
   # user packages
   users.users.scarlet.packages = with pkgs; [
     kitty
@@ -147,9 +151,7 @@ in {
 
     circumflex
 
-    (llama-cpp.override {
-      cudaSupport = true;
-    })
+    llama-cpp-cuda # from pinned nixpkgs, see overlays/pinned.nix
   ];
 
   # shell
@@ -282,7 +284,6 @@ in {
     wget
     firefox
     google-chrome
-    tailscale
 
     # graphics
     mesa-demos
@@ -303,9 +304,7 @@ in {
     docker
     sqlite
     dbeaver-bin
-    (blender.override {
-      cudaSupport = true;
-    })
+    blender-cuda # from pinned nixpkgs, see overlays/pinned.nix
 
     # ardour plugins
     lv2
@@ -317,14 +316,6 @@ in {
     pavucontrol
     ffmpeg
     playerctl
-
-    #jellyfin pkgs
-    pkgs.jellyfin
-    pkgs.jellyfin-web
-    pkgs.jellyfin-ffmpeg
-
-    #font
-    noto-fonts-cjk-sans
   ];
 
   xdg.mime.defaultApplications = {
@@ -349,6 +340,9 @@ in {
   # Enable the OpenSSH daemon.
   services.openssh = {
     enable = true;
+    # defaults to true, which opens 22/2222 on every interface.
+    # ssh is only allowed over tailscale, see firewall below.
+    openFirewall = false;
     ports = [22 2222];
     settings = {
       PasswordAuthentication = false;
@@ -372,7 +366,7 @@ in {
   networking.firewall = {
     # for input leap
     allowedTCPPorts = [24800];
-    interfaces.tailscale0.allowedTCPPorts = [2222 32400];
+    interfaces.tailscale0.allowedTCPPorts = [22 2222 32400];
     # networking.firewall.allowedUDPPorts = [ ... ];
   };
   # Or disable the firewall altogether.
