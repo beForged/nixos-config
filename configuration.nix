@@ -233,6 +233,8 @@ in {
 
   fonts.packages = with pkgs; [
     noto-fonts-cjk-sans
+    fira-code
+    helvetica-neue-lt-std
   ];
 
   i18n.inputMethod = {
@@ -275,6 +277,7 @@ in {
     home-manager
     ripgrep
     ugrep
+    pi-coding-agent
 
     # nix
     alejandra # linter
