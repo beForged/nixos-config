@@ -4,7 +4,7 @@
 # see zsh alias flakeup-pinned
 {nixpkgs-pinned}: final: prev: let
   # cudaSupport is set for this whole package set (not via .override) so the
-  # derivations matches cache.nixos-cuda.org builds 
+  # derivations matches cache.nixos-cuda.org builds
   pinned = import nixpkgs-pinned {
     inherit (prev.stdenv.hostPlatform) system;
     config = {
