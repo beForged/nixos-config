@@ -11,6 +11,9 @@
 
     debounce-mouse.url = "git+ssh://git@github.com/beForged/debounce-mouse.git";
     debounce-mouse.inputs.nixpkgs.follows = "nixpkgs";
+
+    lastfmanalysis.url = "git+ssh://git@github.com/beForged/lastfmanalysis.git";
+    lastfmanalysis.inputs.nixpkgs.follows = "nixpkgs";
   };
   outputs = {
     self,
@@ -18,6 +21,7 @@
     nixpkgs-pinned,
     home-manager,
     debounce-mouse,
+    lastfmanalysis,
   }: {
     nixosConfigurations.scarlet = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
@@ -30,6 +34,7 @@
         ./configuration.nix
         {nixpkgs.overlays = [(import ./overlays/pinned.nix {inherit nixpkgs-pinned;})];}
         debounce-mouse.nixosModules.default
+        lastfmanalysis.nixosModules.default
 
         home-manager.nixosModules.home-manager
         {

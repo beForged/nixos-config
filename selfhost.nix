@@ -100,6 +100,17 @@
 
   # --------------------------
 
+  # lastfm homepage, served on / by traefik below
+  services.lastfmanalysis = {
+    enable = true;
+    port = 9100;
+    # run as me so /push and /pull can use ~/vault/vault and my git/ssh keys
+    user = "scarlet";
+    group = "users";
+  };
+
+  # --------------------------
+
   #postgresql
   services.postgresql = {
     enable = true;
