@@ -40,6 +40,26 @@
         "type": "github"
       }
     },
+    "lastfmanalysis": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1792686898,
+        "narHash": "sha256-tG0cveqkNDg9nCFP6BH8qTwC74DX/S27Ebyq+tHLkwU=",
+        "ref": "refs/heads/main",
+        "rev": "7adabb4cbbb412e293363f9c6e608095b94e101f",
+        "revCount": 26,
+        "type": "git",
+        "url": "ssh://git@github.com/beForged/lastfmanalysis.git"
+      },
+      "original": {
+        "type": "git",
+        "url": "ssh://git@github.com/beForged/lastfmanalysis.git"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1792502884,
@@ -76,6 +96,7 @@
       "inputs": {
         "debounce-mouse": "debounce-mouse",
         "home-manager": "home-manager",
+        "lastfmanalysis": "lastfmanalysis",
         "nixpkgs": "nixpkgs",
         "nixpkgs-pinned": "nixpkgs-pinned"
       }
