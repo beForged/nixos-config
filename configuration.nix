@@ -129,8 +129,6 @@ in {
     whisper-cpp-vulkan
 
     ardour
-    # sox
-    audacity
 
     rsync
     kdePackages.kdenlive

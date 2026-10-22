@@ -34,17 +34,17 @@
 
   # --------------------------
 
-  services.adguardhome = {
-    enable = true;
-    openFirewall = false;
-    port = 3001;
-    settings = {
-      #http.address = "127.0.0.1:9001";
-      dns.bind_host = "192.168.86.20";
-      dns.port = 3005;
-      schema_version = 20;
-    };
-  };
+#  services.adguardhome = {
+#    enable = true;
+#    openFirewall = false;
+#    port = 3001;
+#    settings = {
+#      #http.address = "127.0.0.1:9001";
+#      dns.bind_host = "192.168.86.20";
+#      dns.port = 3005;
+#      schema_version = 20;
+#    };
+#  };
 
   # --------------------------
 
