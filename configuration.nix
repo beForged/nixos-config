@@ -82,6 +82,11 @@ in {
   security.sudo.extraConfig = ''
     %wheel  ALL=NOPASSWD: /run/current-system/sw/bin/shutdown
   '';
+  # mitigations for ca cert issues
+  security.pki.caCertificateBlacklist = [
+    "Comodo AAA Services root"
+    "emSign ECC Root CA - G3"
+  ];
 
   # user configuration - set password with passwd
   # default shell specification
