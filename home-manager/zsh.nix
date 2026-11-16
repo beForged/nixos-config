@@ -45,8 +45,6 @@
 
       rebuild = "nixos-rebuild switch --flake '/home/scarlet/nixos#scarlet' --sudo";
       rebuild-gw = "nixos-rebuild switch --flake '/home/scarlet/nixos#gateway' --target-host scarlet@gwvnic --sudo";
-      # update flake inputs except nixpkgs-pinned (slow cuda builds)
-      flakeup = "nix flake update --flake /home/scarlet/nixos nixpkgs home-manager debounce-mouse";
       flakeup-pinned = "nix flake update --flake /home/scarlet/nixos nixpkgs-pinned";
       awaken = "hyprctl dispatch dpms on";
     };
@@ -55,6 +53,12 @@
 
       gcm() { git commit -am "$1" && git push; }
       gcb() { git switch -c "$1"; }
+
+      # update all flake inputs except nixpkgs-pinned (slow cuda builds), see flakeup-pinned
+      flakeup() {
+        local inputs=($(nix flake metadata /home/scarlet/nixos --json | ${pkgs.jq}/bin/jq -r '.locks.nodes.root.inputs | keys[] | select(. != "nixpkgs-pinned")'))
+        nix flake update --flake /home/scarlet/nixos $inputs
+      }
 
       if [[ $- == *i* ]]; then
         if (( RANDOM % 2 )); then

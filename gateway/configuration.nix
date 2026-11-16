@@ -33,8 +33,11 @@
   };
   nix.settings.trusted-users = ["root" "scarlet"];
 
+  users.mutableUsers = false;
+
   users.users.scarlet = {
     isNormalUser = true;
+    hashedPassword = "!";
     home = "/home/scarlet";
     extraGroups = ["wheel"];
     shell = pkgs.zsh;

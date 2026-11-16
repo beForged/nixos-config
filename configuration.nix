@@ -187,19 +187,9 @@ in {
     xwayland.enable = true;
   };
 
-  # Enable the X11 windowing system.
-  services.xserver = {
-    enable = true;
-    # autorun = false;
-    # exportConfiguration = true;
-
-    videoDrivers = ["nvidia"];
-
-    #window manager
-    # windowManager.i3.package = pkgs.i3-gaps;
-    # windowManager.i3.enable = true;
-    # displayManager.startx.enable = true;
-  };
+  # no X server / display manager, hyprland is started from tty1 (see zsh.nix).
+  # videoDrivers still selects the nvidia driver for wayland
+  services.xserver.videoDrivers = ["nvidia"];
 
   hardware.nvidia = {
     modesetting.enable = true;
@@ -273,7 +263,6 @@ in {
     pciutils # contains lspci
     psmisc # utils
     dig
-    busybox
     ntfs3g # ntfs mounting
     fuse
     xdg-utils
@@ -370,9 +359,8 @@ in {
 
   # Open ports in the firewall.
   networking.firewall = {
-    # for input leap
-    allowedTCPPorts = [24800];
-    interfaces.tailscale0.allowedTCPPorts = [22 2222 32400];
+    # 80 for traefik
+    interfaces.tailscale0.allowedTCPPorts = [22 80 2222 32400];
     # networking.firewall.allowedUDPPorts = [ ... ];
   };
   # Or disable the firewall altogether.

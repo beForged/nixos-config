@@ -132,7 +132,7 @@
           asDefault = true;
         };
         traefik = {
-          # dashboard endpoint, insecure api so keep it on localhost
+          # dashboard endpoint, insecure api so keep it on localhost only (no router)
           address = "127.0.0.1:8080";
         };
       };
@@ -178,12 +178,6 @@
             entryPoints = ["web"];
             middlewares = ["strip-jellyfin-prefix"];
           };
-          traefik-dash = {
-            rule = "Host(`nixos.tail097e5.ts.net`) && PathPrefix(`/traefik`)";
-            service = "traefik";
-            entryPoints = ["web"];
-            middlewares = ["strip-traefik-dash-prefix"];
-          };
           actual-budget = {
             rule = "Host(`nixos.tail097e5.ts.net`) && PathPrefix(`/money`)";
             service = "actual";
@@ -197,9 +191,6 @@
           };
           strip-jellyfin-prefix = {
             stripPrefix.prefixes = ["/jellyfin"];
-          };
-          strip-traefik-dash-prefix = {
-            stripPrefix.prefixes = ["/traefik"];
           };
           strip-actual-prefix = {
             stripPrefix.prefixes = ["/money"];
@@ -231,13 +222,6 @@
             loadBalancer.servers = [
               {
                 url = "http://127.0.0.1:8096";
-              }
-            ];
-          };
-          traefik = {
-            loadBalancer.servers = [
-              {
-                url = "http://127.0.0.1:8080";
               }
             ];
           };
