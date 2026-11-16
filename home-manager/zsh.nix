@@ -43,8 +43,8 @@
 
       restartpipewire = "systemctl --user restart wireplumber pipewire pipewire-pulse";
 
-      rebuild = "nixos-rebuild switch --flake '/home/scarlet/nixos#scarlet' --sudo";
-      rebuild-gw = "nixos-rebuild switch --flake '/home/scarlet/nixos#gateway' --target-host scarlet@gwvnic --sudo";
+      rebuild = "nh os switch /home/scarlet/nixos -H scarlet";
+      rebuild-gw = "nh os switch /home/scarlet/nixos -H gateway --target-host scarlet@gwvnic -e passwordless";
       flakeup-pinned = "nix flake update --flake /home/scarlet/nixos nixpkgs-pinned";
       awaken = "hyprctl dispatch dpms on";
     };

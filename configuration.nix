@@ -41,10 +41,15 @@ in {
   # disk space optimization
   boot.loader.systemd-boot.configurationLimit = 15;
 
-  nix.gc = {
-    automatic = true;
-    dates = "monthly";
-    options = "--delete-older-than 30d";
+  # nh replaces nixos-rebuild (see rebuild alias) and nix.gc
+  programs.nh = {
+    enable = true;
+    flake = "/home/scarlet/nixos";
+    clean = {
+      enable = true;
+      dates = "monthly";
+      extraArgs = "--keep-since 30d";
+    };
   };
 
   nix.settings.auto-optimise-store = true;
@@ -110,7 +115,6 @@ in {
 
   # user packages
   users.users.scarlet.packages = with pkgs; [
-    kitty
     ranger
     glow
 
@@ -179,6 +183,7 @@ in {
   hardware = {
     graphics.enable = true;
     graphics.enable32Bit = true;
+    graphics.extraPackages = [pkgs.nvidia-vaapi-driver];
   };
 
   # enable hyprland wayland
@@ -266,14 +271,12 @@ in {
     ntfs3g # ntfs mounting
     fuse
     xdg-utils
-    home-manager
     ripgrep
     ugrep
     pi-coding-agent
 
     # nix
     alejandra # linter
-    nh
 
     # internet
     wget
@@ -282,21 +285,18 @@ in {
 
     # graphics
     mesa-demos
-    nvidia-vaapi-driver
 
     ############
     #dev tools #
     ############
     gnumake
     gcc
-    git
     racket
     go
     gopls
     jdk11
     python3
     flyctl
-    docker
     sqlite
     dbeaver-bin
     blender-cuda # from pinned nixpkgs, see overlays/pinned.nix

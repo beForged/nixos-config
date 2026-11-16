@@ -31,8 +31,6 @@
     grim
     slurp
     wl-clipboard
-    mako
-    kdePackages.polkit-kde-agent-1
     libnotify
   ];
 

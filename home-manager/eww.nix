@@ -37,8 +37,21 @@
     (defpoll caffeine :interval "5s"
       `systemctl --user is-active hypridle.service >/dev/null 2>&1 && echo "off" || echo "on"`)
 
-    (defpoll cpu :interval "3s"
-      `top -bn1 | grep "Cpu(s)" | awk '{print int($2)}'`)
+    (deflisten cpu :initial "0"
+      `${pkgs.writeShellScript "get-cpu" ''
+      # busy % of all cpu time (not just user) between samples, from /proc/stat
+      read -r _ u n s i w q sq st _ < /proc/stat
+      prev_busy=$((u + n + s + q + sq + st))
+      prev_total=$((prev_busy + i + w))
+      while sleep 3; do
+        read -r _ u n s i w q sq st _ < /proc/stat
+        busy=$((u + n + s + q + sq + st))
+        total=$((busy + i + w))
+        echo $((100 * (busy - prev_busy) / (total - prev_total)))
+        prev_busy=$busy
+        prev_total=$total
+      done
+    ''}`)
 
     (defpoll memory :interval "5s"
       `free -m | awk '/Mem:/ {print $3 "MB"}'`)
@@ -49,11 +62,11 @@
     (defpoll gpu :interval "3s"
       `nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader,nounits | awk '{print int($1)}'`)
 
-    (defpoll now-playing :interval "1s"
-      `playerctl -p firefox metadata --format '{{artist}} - {{title}}'`)
+    (deflisten now-playing :initial ""
+      `playerctl -p firefox --follow metadata --format '{{artist}} - {{title}}'`)
 
-    (defpoll playing-status :interval "1s"
-      `playerctl -p firefox status`)
+    (deflisten playing-status :initial ""
+      `playerctl -p firefox --follow status`)
 
 
     (deflisten workspaces :initial "[]"

@@ -16,6 +16,10 @@
 in {
   home.packages = [wallpaper-switcher];
 
+  # started with hyprland-session.target instead of exec-once
+  services.mako.enable = true; # d-bus activated
+  services.hyprpolkitagent.enable = true;
+
   wayland.windowManager.hyprland = {
     enable = true;
     # use the hyprland + portal installed by programs.hyprland in configuration.nix
@@ -40,8 +44,6 @@ in {
         "fcitx5 -d"
         "sleep 1 && ${pkgs.eww}/bin/eww open bar && ${pkgs.eww}/bin/eww open bar1"
         "awww-daemon && ${wallpaper-switcher}/bin/wallpaper-switcher"
-        "mako"
-        "${pkgs.kdePackages.polkit-kde-agent-1}/libexec/polkit-kde-authentication-agent-1"
       ];
 
       input = {

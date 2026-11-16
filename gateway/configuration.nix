@@ -75,7 +75,6 @@
     vim
     git
     wget
-    tailscale
     htop
     kitty.terminfo
     tcpdump
