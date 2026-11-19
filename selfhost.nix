@@ -180,7 +180,10 @@
             rule = "Host(`nixos.gecko-egret.ts.net`) && PathPrefix(`/jellyfin`)";
             service = "jellyfin";
             entryPoints = ["web"];
-            middlewares = ["strip-jellyfin-prefix"];
+            # no stripPrefix here: jellyfin is configured with
+            # HttpRoot=jellyfin (in /var/lib/jellyfin/config/jellyfin.config.xml)
+            # and serves under /jellyfin itself. Stripping the prefix causes
+            # an infinite redirect loop.
           };
           actual-budget = {
             rule = "Host(`nixos.gecko-egret.ts.net`) && PathPrefix(`/money`)";
@@ -192,9 +195,6 @@
         middlewares = {
           strip-forgejo-prefix = {
             stripPrefix.prefixes = ["/forgejo"];
-          };
-          strip-jellyfin-prefix = {
-            stripPrefix.prefixes = ["/jellyfin"];
           };
           strip-actual-prefix = {
             stripPrefix.prefixes = ["/money"];
