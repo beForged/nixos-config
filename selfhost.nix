@@ -10,8 +10,8 @@
     group = "git";
     settings = {
       server = {
-        DOMAIN = "nixos.tail097e5.ts.net";
-        ROOT_URL = "http://nixos.tail097e5.ts.net/forgejo";
+        DOMAIN = "nixos.gecko-egret.ts.net";
+        ROOT_URL = "http://nixos.gecko-egret.ts.net/forgejo";
         HTTP_PORT = 3000;
         SSH_PORT = 2222;
       };
@@ -27,9 +27,13 @@
   };
 
   users.groups.git = {};
-  # mount tempfile for forgejo
   systemd.tmpfiles.rules = [
+    # mount tempfile for forgejo
     "d /var/lib/forgejo/custom 0755 git git - -"
+    # let the jellyfin user traverse /home/scarlet so it can reach
+    # /home/scarlet/memes/video (the "test" library links into it).
+    # execute-only ACL for jellyfin: no listing, no reading of other files.
+    "a+ /home/scarlet - - - - u:jellyfin:x"
   ];
 
   # --------------------------
@@ -91,8 +95,8 @@
       server = {
         http_addr = "127.0.0.1";
         http_port = 3333;
-        domain = "nixos.tail097e5.ts.net";
-        root_url = "http://nixos.tail097e5.ts.net/grafana";
+        domain = "nixos.gecko-egret.ts.net";
+        root_url = "http://nixos.gecko-egret.ts.net/grafana";
         serve_from_sub_path = true;
       };
     };
@@ -157,29 +161,29 @@
       http = {
         routers = {
           homepage = {
-            rule = "Host(`nixos.tail097e5.ts.net`) && PathPrefix(`/`)";
+            rule = "Host(`nixos.gecko-egret.ts.net`) && PathPrefix(`/`)";
             entryPoints = ["web"];
             service = "homepage";
           };
           forgejo = {
-            rule = "Host(`nixos.tail097e5.ts.net`) && PathPrefix(`/forgejo`)";
+            rule = "Host(`nixos.gecko-egret.ts.net`) && PathPrefix(`/forgejo`)";
             service = "forgejo";
             entryPoints = ["web"];
             middlewares = ["strip-forgejo-prefix"];
           };
           grafana = {
-            rule = "Host(`nixos.tail097e5.ts.net`) && PathPrefix(`/grafana`)";
+            rule = "Host(`nixos.gecko-egret.ts.net`) && PathPrefix(`/grafana`)";
             service = "grafana";
             entryPoints = ["web"];
           };
           jellyfin = {
-            rule = "Host(`nixos.tail097e5.ts.net`) && PathPrefix(`/jellyfin`)";
+            rule = "Host(`nixos.gecko-egret.ts.net`) && PathPrefix(`/jellyfin`)";
             service = "jellyfin";
             entryPoints = ["web"];
             middlewares = ["strip-jellyfin-prefix"];
           };
           actual-budget = {
-            rule = "Host(`nixos.tail097e5.ts.net`) && PathPrefix(`/money`)";
+            rule = "Host(`nixos.gecko-egret.ts.net`) && PathPrefix(`/money`)";
             service = "actual";
             entryPoints = ["web"];
             middlewares = ["strip-actual-prefix"];
