@@ -186,12 +186,37 @@ in {
   };
 
   # enable hyprland wayland
-  programs.hyprland = {
-    enable = true;
-    xwayland.enable = true;
+  # programs.hyprland = {
+  #   enable = true;
+  #   xwayland.enable = true;
+  # };
+
+  programs.niri.enable = true;
+
+  environment.etc."nvidia/nvidia-application-profiles-rc.d/50-limit-free-buffer-pool-in-wayland-compositors.json".text = builtins.toJSON {
+    rules = [
+      {
+        pattern = {
+          feature = "procname";
+          matches = "niri";
+        };
+        profile = "Limit Free Buffer Pool On Wayland Compositors";
+      }
+    ];
+    profiles = [
+      {
+        name = "Limit Free Buffer Pool On Wayland Compositors";
+        settings = [
+          {
+            key = "GLVidHeapReuseRatio";
+            value = 0;
+          }
+        ];
+      }
+    ];
   };
 
-  # no X server / display manager, hyprland is started from tty1 (see zsh.nix).
+  # no X server / display manager, niri is started from tty1 (see zsh.nix).
   # videoDrivers still selects the nvidia driver for wayland
   services.xserver.videoDrivers = ["nvidia"];
 

@@ -46,7 +46,7 @@
       rebuild = "nh os switch /home/scarlet/nixos -H scarlet";
       rebuild-gw = "nh os switch /home/scarlet/nixos -H gateway --target-host scarlet@gwvnic -e passwordless";
       flakeup-pinned = "nix flake update --flake /home/scarlet/nixos nixpkgs-pinned";
-      awaken = "hyprctl dispatch dpms on";
+      awaken = "niri msg action power-on-monitors";
     };
     initContent = ''
       export LV2_PATH=/home/scarlet/.lv2:/home/scarlet/.nix-profile/lib/lv2:/run/current-system/sw/lib/lv2
@@ -68,9 +68,9 @@
         fi
       fi
 
-       # ---- Hyprland autostart on TTY1 ----
+       # ---- niri autostart on TTY1 ----
       if [ -z "$DISPLAY" ] && [ -z "$WAYLAND_DISPLAY" ] && [ "$(tty)" = "/dev/tty1" ]; then
-        exec Hyprland
+        exec niri-session
       fi
     '';
   };

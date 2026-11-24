@@ -12,9 +12,11 @@
     ./kitty.nix
     #./i3.nix
     #./picom.nix
-    ./hyprland.nix
-    ./hypridle.nix
-    ./eww.nix
+    #./hyprland.nix
+    #./hypridle.nix
+    #./eww.nix
+    ./niri.nix
+    ./noctalia.nix
   ];
 
   home.pointerCursor = {
@@ -26,8 +28,6 @@
   };
 
   home.packages = with pkgs; [
-    rofi
-    awww
     grim
     slurp
     wl-clipboard
