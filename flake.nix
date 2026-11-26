@@ -6,6 +6,12 @@
     # use the `flakeup` alias for routine updates, it skips this input.
     # `flakeup-pinned` bumps this pinned input (long rebuild possible)
     nixpkgs-pinned.url = "github:nixos/nixpkgs/nixos-unstable";
+    # Pinned to the nixpkgs rev from before the 2026-11-18 update (hyprland 0.56.2).
+    # Hyprland >= 0.57 dropped hyprland.conf support in favor of hyprland.lua and
+    # auto-generates a default lua config on first launch, which silently replaced
+    # our config. Remove this pin once home-manager/hyprland.nix is migrated to
+    # configType = "lua".
+    nixpkgs-hyprland.url = "github:nixos/nixpkgs/02c087f3fe673c9e317f206a627cb6b910336dbe";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -19,6 +25,7 @@
     self,
     nixpkgs,
     nixpkgs-pinned,
+    nixpkgs-hyprland,
     home-manager,
     debounce-mouse,
     lastfmanalysis,
@@ -29,7 +36,7 @@
       system = "x86_64-linux";
 
       specialArgs = {
-        inherit home-manager;
+        inherit home-manager nixpkgs-hyprland;
       };
 
       modules = [

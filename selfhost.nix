@@ -30,10 +30,7 @@
   systemd.tmpfiles.rules = [
     # mount tempfile for forgejo
     "d /var/lib/forgejo/custom 0755 git git - -"
-    # let the jellyfin user traverse /home/scarlet so it can reach
-    # /home/scarlet/memes/video (the "test" library links into it).
-    # execute-only ACL for jellyfin: no listing, no reading of other files.
-    "a+ /home/scarlet - - - - u:jellyfin:x"
+    "a+ /home/scarlet - - - - u:jellyfin:--x,m::--x"
   ];
 
   # --------------------------

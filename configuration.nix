@@ -4,6 +4,7 @@
 {
   config,
   pkgs,
+  nixpkgs-hyprland,
   ...
 }:
 # list packages installed in system profile tracking unstable branch
@@ -189,6 +190,10 @@ in {
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;
+    # Hyprland >= 0.57 only reads hyprland.lua (it auto-generated a default one
+    # on first launch, wiping our config). Pin 0.56.2 until the config is
+    # migrated to lua, see nixpkgs-hyprland in flake.nix.
+    package = nixpkgs-hyprland.legacyPackages.x86_64-linux.hyprland;
   };
 
   # no X server / display manager, hyprland is started from tty1 (see zsh.nix).
